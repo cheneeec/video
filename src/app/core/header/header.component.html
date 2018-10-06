@@ -1,0 +1,33 @@
+<mat-toolbar class="header">
+
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+            *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon" color="primary">menu</mat-icon>
+    </button>
+
+
+    <span class="category-tip">电影</span>
+
+    <div class="search-input-container">
+        <mat-icon class="search-input-icon">search</mat-icon>
+        <input type="text" class="search-input">
+
+        <select name="category-select" class="search-select">
+            <option value="">选择</option>
+            <option value="">选择</option>
+            <option value="">选择</option>
+        </select>
+    </div>
+
+
+    <div class="user-status">
+        <button mat-icon-button>
+            <mat-icon matBadge="15">notifications_none</mat-icon>
+        </button>
+
+        <span class="username">zhangsan</span>
+
+        <button mat-button color="primary">登录</button>
+    </div>
+
+</mat-toolbar>

@@ -1,0 +1,79 @@
+$header-height: 80px;
+
+//search-input
+$search-input-container-width: 655px;
+$search-input-height: 42px;
+
+//user-status
+$user-status-margin-right: 45px;
+
+//半圆角
+@mixin half-rounded-corner($direction,$value:30px) {
+  border-top-#{$direction}-radius: $value;
+  border-bottom-#{$direction}-radius: $value;
+}
+
+@mixin header-input($direction,$value:30px) {
+  @include half-rounded-corner($direction, $value);
+  background-color: #FAFAFA;
+  border: 1px solid #FAFAFA; /*去除阴影*/
+  &:focus{
+    outline-style: none;
+  }
+}
+
+.header {
+  height: $header-height; //110
+  background-color: white;
+  justify-content: space-between;
+}
+
+.search-input-container {
+
+}
+
+.search-input-icon {
+  position: absolute;
+  margin-left: 13px;
+  margin-top: 10px;
+  font-size: 29px;
+}
+
+.search-input {
+  height: $search-input-height;
+  text-align: start;
+  width: 490px;
+  padding-left: 59px;
+  font-size: 20px;
+
+  @include header-input(left);
+
+}
+
+.search-select {
+
+  position: absolute;
+  height: $search-input-height+4px;
+  width: 120px;
+  @include header-input(right);
+
+  border-left-color: black;
+  margin-left: -1px;
+  padding-left: 23px;
+
+  font-size: inherit; //设置字体
+
+}
+
+.user-status {
+
+}
+
+.username {
+  margin-left: 40px;
+  margin-right: 20px;
+}
+
+.category-tip {
+  font-size: 25px;
+}

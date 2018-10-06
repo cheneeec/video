@@ -1,0 +1,47 @@
+$sidebar-width: 300px;
+$sidebar-background-color: #FAFAFA;
+
+.sidebar {
+  width: $sidebar-width;
+  background-color: $sidebar-background-color;
+}
+
+.logo-container {
+  height: 165px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.logo {
+  justify-content: space-around;
+}
+
+.logo > mat-icon {
+  font-size: 46px;
+}
+
+.title {
+  margin-top: 27px;
+  font-size: 26px;
+}
+
+
+.subscription {
+  width: 250px;
+  height: 40px;
+  margin-top: 40px;
+  color: white;
+  font-size: 27px;
+  text-align: start;
+  border-radius: 30px;  /*设置圆角*/
+}
+
+mat-divider {
+  width: 84%;
+  margin: 20px auto;
+}
+
+
+.badge{
+  margin-right: 20px;
+}
