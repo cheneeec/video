@@ -11,13 +11,7 @@ export class MouseEnterAddClass {
 
     @Input('appMouseEnterAddClass')
     set _classNames(classNames: string) {
-        console.log(classNames);
-        this.classNames = classNames.replace('[', '')
-            .replace(']', '')
-            .replace(/'/g, '')
-            .split(',');
-
-
+        this.classNames = eval(classNames);
     }
 
     constructor(private elementRef: ElementRef) {
@@ -28,8 +22,6 @@ export class MouseEnterAddClass {
      * 当鼠标进入时
      */
     @HostListener("mouseenter") onMouseEnter() {
-        console.log(this.classNames);
-        console.log(typeof this.classNames);
         this.classNames
             .forEach(className => this.elementRef.nativeElement.classList.add(className));
 

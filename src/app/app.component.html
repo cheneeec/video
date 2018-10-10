@@ -6,13 +6,12 @@
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
             [mode]="(isHandset$ | async) ? 'over' : 'side'"
             [opened]="!(isHandset$ | async)">
-
-
         <app-sidebar></app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content class="content-container">
         <app-header></app-header>
+
         <!-- Add Content Here -->
         <div class="content">
             <router-outlet></router-outlet>
