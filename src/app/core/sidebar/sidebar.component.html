@@ -1,20 +1,18 @@
 <nav class="sidebar">
 
-    <mat-toolbar class="logo-container">
+    <mat-toolbar class="logo-container" fxLayout="column" fxLayoutAlign="center space-around">
 
-        <mat-toolbar class="logo">
+        <mat-toolbar-row class="logo" fxLayout="row" fxLayoutAlign="space-around center">
             <mat-icon color="primary">movie</mat-icon>
-            <span class="title active">
-             <strong>FORJAN</strong>.IN
-            </span>
-        </mat-toolbar>
+            <span class="title active"><strong>FORJAN</strong>.IN</span>
+        </mat-toolbar-row>
 
-        <div>
+        <mat-toolbar-row>
             <button mat-flat-button color="primary" class="subscription arc-button mat-elevation-z1">
                 <mat-icon>star</mat-icon>
                 subscription
             </button>
-        </div>
+        </mat-toolbar-row>
 
     </mat-toolbar>
 
@@ -24,7 +22,7 @@
 
         <mat-list-item class="nav-active">
             <mat-icon mat-list-icon>home</mat-icon>
-            <span mat-line><a matLine href="" >首页</a></span>
+            <span mat-line><a matLine href="">首页</a></span>
         </mat-list-item>
 
         <mat-list-item>
@@ -48,12 +46,12 @@
             </a>
         </mat-list-item>
 
-        <mat-list-item >
-            <mat-icon mat-list-icon >favorite_border</mat-icon>
-            <a matLine >
+        <mat-list-item>
+            <mat-icon mat-list-icon>favorite_border</mat-icon>
+            <a matLine>
                 我的收藏
             </a>
-            <i matBadge="22"   class="badge"></i>
+            <i matBadge="22" class="badge"></i>
         </mat-list-item>
 
         <mat-list-item>
@@ -79,3 +77,5 @@
         </mat-list-item>
     </mat-nav-list>
 </nav>
+
+

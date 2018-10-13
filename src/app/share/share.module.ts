@@ -13,6 +13,7 @@ import {LayoutModule} from "@angular/cdk/layout";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
     imports: [
@@ -32,7 +33,7 @@ import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
         MatChipsModule,
         LayoutModule,
         MatBadgeModule,
-
+        FlexLayoutModule,
 
 
         HttpClientModule,
@@ -59,6 +60,7 @@ import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
         MatChipsModule,
         MatBadgeModule,
         LayoutModule,
+        FlexLayoutModule,
 
         //angular
         HttpClientModule,

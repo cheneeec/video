@@ -1,4 +1,4 @@
-<mat-toolbar class="header">
+<mat-toolbar class="header" fxLayout="row" fxLayoutAlign="space-between center">
 
     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
             *ngIf="isHandset$ | async">
@@ -6,9 +6,9 @@
     </button>
 
 
-    <span class="category-tip">电影</span>
+    <span class="category-tip" fxFlex="85px">电影</span>
 
-    <div class="search-input-container">
+    <div fxFlex="650px" fxHide.lt-sm>
         <mat-icon class="search-input-icon">search</mat-icon>
         <input type="text" class="search-input">
 

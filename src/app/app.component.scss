@@ -1,23 +1,31 @@
+/*
 $sidenav-width:300px;
 
 .sidenav-container {
   height: 100%;
   background-color: white;
+
 }
 
-.sidenav {
+!*.sidenav {
   width: $sidenav-width;
-}
+}*!
 
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
 }
 
-.content-container {
+!*.content-container {
   margin-left: $sidenav-width+58px !important;
   margin-right: 45px;
-}
+}*!
 
 
 //=========
+*/
+/*
+
+.flex-container{
+  width: 100%;
+}*/

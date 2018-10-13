@@ -14,7 +14,8 @@ import {ItemModule} from "./item/item.module";
       ShareModule,
       BrowserModule,
       CoreModule,
-      ItemModule
+      ItemModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

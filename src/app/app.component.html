@@ -1,4 +1,5 @@
-<mat-sidenav-container class="sidenav-container">
+<!--
+<mat-sidenav-container class="sidenav-container" fxLayout="row">
     <mat-sidenav
             #drawer
             class="sidenav"
@@ -6,16 +7,38 @@
             [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
             [mode]="(isHandset$ | async) ? 'over' : 'side'"
             [opened]="!(isHandset$ | async)">
-        <app-sidebar></app-sidebar>
+        <app-sidebar fxFlex="6"></app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content class="content-container">
         <app-header></app-header>
 
-        <!-- Add Content Here -->
+        <div fxFlex="1"></div>
         <div class="content">
             <router-outlet></router-outlet>
         </div>
+        <div fxFlex="1"></div>
     </mat-sidenav-content>
 
 </mat-sidenav-container>
+-->
+
+<div class="flex-container" fxLayout="row" fxLayoutAlign="start stretch">
+
+    <app-sidebar fxFlex="16%" fxHide.lt-md></app-sidebar>
+
+    <div  fxFlex="2%"></div>
+
+    <div class="content-container" fxFlex="100% 80% auto" fxLayout="column">
+
+        <app-header fxFlex="10%"></app-header>
+
+            <div fxFlex="90%">
+                <router-outlet></router-outlet>
+            </div>
+
+    </div>
+
+    <div fxFlex="2%"></div>
+
+</div>
