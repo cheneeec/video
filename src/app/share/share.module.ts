@@ -14,6 +14,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { AlertComponent } from './alert.component';
+import { ConfirmComponent } from './confirm.component';
 
 @NgModule({
     imports: [
@@ -70,7 +72,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
         MouseEnterAddClass
 
     ],
-    declarations: [MouseEnterAddClass]
+    declarations: [MouseEnterAddClass, AlertComponent, ConfirmComponent],
+    entryComponents:[AlertComponent,ConfirmComponent]
 })
 export class ShareModule {
 }
