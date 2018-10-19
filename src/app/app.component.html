@@ -1,43 +1,24 @@
-<!--<mat-sidenav-container class="sidenav-container" fxLayout="row">
-    <mat-sidenav
-            #drawer
-            class="sidenav"
-            fixedInViewport="true"
-            [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-            [mode]="(isHandset$ | async) ? 'over' : 'side'"
-            [opened]="!(isHandset$ | async)">
-        <app-sidebar fxFlex="6"></app-sidebar>
-    </mat-sidenav>
+<div class="view-container">
+    <app-header (toggle)="sidebar.toggle();"></app-header>
+    <div class="view-container">
 
-    <mat-sidenav-content class="content-container">
-        <app-header></app-header>
+        <mat-sidenav-container>
 
-        <div fxFlex="1"></div>
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
-        <div fxFlex="1"></div>
-    </mat-sidenav-content>
+            <mat-sidenav #sidebar  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+                <app-sidebar></app-sidebar>
 
-</mat-sidenav-container>-->
+            </mat-sidenav>
 
-<!--<div class="flex-container" fxLayout="row" >
+            <mat-sidenav-content>
+                <div class="content">
+                    <router-outlet></router-outlet>
+                </div>
+            </mat-sidenav-content>
 
-    <app-sidebar fxFlex="16%" fxHide.lt-md></app-sidebar>
-
-    <div  fxFlex="2%"></div>
-
-    <div class="content-container" fxFlex="100% 80% auto" fxLayout="column">
-
-        <app-header fxFlex="10%"></app-header>
-
-            <div fxFlex="90%">
-                <router-outlet></router-outlet>
-            </div>
-
+        </mat-sidenav-container>
     </div>
+</div>
 
-    <div fxFlex="2%"></div>
 
-</div>-->
 

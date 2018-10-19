@@ -1,33 +1,85 @@
-<mat-toolbar class="header" fxLayout="row" fxLayoutAlign="space-between center">
+<!--
+<mat-toolbar class="mat-elevation-z4">
 
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-            *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon" color="primary">menu</mat-icon>
-    </button>
+    <mat-toolbar-row fxLayout="row">
 
-
-    <span class="category-tip" fxFlex="85px">电影</span>
-
-    <div fxFlex="650px" fxHide.lt-sm>
-        <mat-icon class="search-input-icon">search</mat-icon>
-        <input type="text" class="search-input">
-
-        <select name="category-select" class="search-select">
-            <option value="">选择</option>
-            <option value="">选择</option>
-            <option value="">选择</option>
-        </select>
-    </div>
+        <div class="menu-button">
+            <button mat-icon-button (click)="toggle.emit()" class="mat-elevation-z1">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
 
 
-    <div class="user-status">
-        <button mat-icon-button>
-            <mat-icon matBadge="15">notifications_none</mat-icon>
-        </button>
+        <div fxFlex="1 1 auto"  style="width:calc(240px - 3.5vh);"></div>
 
-        <span class="username">zhangsan</span>
+        <div class="search-container mat-elevation-z1 " fxFlexOffset.sm="32px"   fxHide.lt-sm [ngStyle.sm]="{width: '240px',marginRight:'100px'}">
+            <input type="text" class="search-input" placeholder="" fxFlex="1 1 auto"  >
+            <button mat-icon-button="" matSuffix>
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
 
-        <button mat-button color="primary">登录</button>
-    </div>
+        <div fxFlex="1 1 auto" style="width:800px;"></div>
 
+        <div class="user-button" fxLayout="row" fxLayoutAlign="end">
+
+            <div fxHide.gt-xs>
+                <button mat-icon-button="" title="搜索">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+
+
+            <div>
+                <img mat-card-avatar src="http://placehold.it/50x50" alt="">
+            </div>
+
+            <button mat-icon-button="" title="退出">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>-->
+<mat-toolbar class="mat-elevation-z4">
+
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+
+        <div class="menu-button">
+            <button mat-icon-button (click)="toggle.emit()" class="mat-elevation-z1">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+
+
+
+        <div class="search-container mat-elevation-z1 "   fxHide.lt-sm [ngStyle.sm]="{width: '240px'}" [ngStyle.gt-sm]="{width: '490px'}" >
+            <input type="text" class="search-input" placeholder="" fxFlex="1 1 auto" >
+            <button mat-icon-button="" matSuffix>
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+
+
+        <div class="user-button" fxLayout="row" fxLayoutAlign="end">
+
+            <div fxHide.gt-xs>
+                <button mat-icon-button="" title="搜索">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+
+
+            <div>
+                <img mat-card-avatar src="http://placehold.it/50x50" alt="">
+            </div>
+
+            <button mat-icon-button="" title="退出">
+                <mat-icon>exit_to_app</mat-icon>
+            </button>
+
+        </div>
+
+    </mat-toolbar-row>
 </mat-toolbar>

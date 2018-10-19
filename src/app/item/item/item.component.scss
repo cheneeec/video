@@ -1,12 +1,28 @@
-.item {
-  margin-top: 23px;
+/*.item {
 
   img {
     border-radius: 10px;
-
   }
-}
+}*/
 
 .item-mouse-enter-active {
   border: red 3px groove;
+}
+
+mat-card {
+  max-width: 200px;
+  margin-bottom: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mat-card-title {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.play-info {
+  position: absolute;
+  z-index: 2;
 }

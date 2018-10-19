@@ -1,81 +1,52 @@
-<nav class="sidebar">
-
-    <mat-toolbar class="logo-container" fxLayout="column" fxLayoutAlign="center space-around">
-
-        <mat-toolbar-row class="logo" fxLayout="row" fxLayoutAlign="space-around center">
-            <mat-icon color="primary">movie</mat-icon>
-            <span class="title active"><strong>FORJAN</strong>.IN</span>
-        </mat-toolbar-row>
-
-        <mat-toolbar-row>
-            <button mat-flat-button color="primary" class="subscription arc-button mat-elevation-z1">
-                <mat-icon>star</mat-icon>
-                subscription
-            </button>
-        </mat-toolbar-row>
-
-    </mat-toolbar>
-
-    <mat-divider></mat-divider>
-
+<nav>
     <mat-nav-list>
-
-        <mat-list-item class="nav-active">
-            <mat-icon mat-list-icon>home</mat-icon>
-            <span mat-line><a matLine href="">首页</a></span>
+        <mat-list-item>
+            <mat-icon mat-list-icon color="accent">home</mat-icon>
+            <span mat-line><a matLine href="" >首页</a></span>
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon>video_library</mat-icon>
+            <mat-icon mat-list-icon color="primary">history</mat-icon>
             <a matLine>
-                电影
+                历史记录
             </a>
         </mat-list-item>
 
+        <h3 mat-subheader>网站精选</h3>
+
         <mat-list-item>
-            <mat-icon mat-list-icon>play_arrow</mat-icon>
-            <a matLine>
-                电视剧
-            </a>
+            <mat-icon mat-list-icon color="primary">music_note</mat-icon>
+            <a matLine href="">音乐</a>
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon>brightness_3</mat-icon>
-            <a matLine>
-                Ramadan
-            </a>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-soccer-ball-o" color="primary"></mat-icon>
+            <a matLine href="">体育</a>
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon>favorite_border</mat-icon>
-            <a matLine>
-                我的收藏
-            </a>
-            <i matBadge="22" class="badge"></i>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-gamepad" color="primary"></mat-icon>
+            <a matLine href="">游戏</a>
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon>collections</mat-icon>
-            <a matLine>
-                稍后观看
-            </a>
+            <mat-icon mat-list-icon color="primary">movie</mat-icon>
+            <a matLine routerLink="movie" [queryParams]="{size:16}">电影</a>
         </mat-list-item>
 
-        <mat-divider></mat-divider>
+        <mat-list-item>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-tv" color="primary"></mat-icon>
+            <a matLine href="">电视节目</a>
+        </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon>settings</mat-icon>
-            <a matLine>
-                设置
-            </a>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-newspaper-o" color="primary"></mat-icon>
+            <a matLine routerLink="animation" [queryParams]="{size:16}">动漫</a>
         </mat-list-item>
+
         <mat-list-item>
-            <mat-icon mat-list-icon>exit_to_app</mat-icon>
-            <a matLine>
-                登出
-            </a>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-imdb" color="primary"></mat-icon>
+            <a matLine href="">直播</a>
         </mat-list-item>
     </mat-nav-list>
 </nav>
-
-

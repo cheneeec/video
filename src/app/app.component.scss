@@ -1,31 +1,21 @@
-/*
-$sidenav-width:300px;
-
-.sidenav-container {
-  height: 100%;
-  background-color: white;
-
-}
-
-!*.sidenav {
-  width: $sidenav-width;
-}*!
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-}
-
-!*.content-container {
-  margin-left: $sidenav-width+58px !important;
-  margin-right: 45px;
-}*!
-
-
-//=========
-*/
-/*
-
-.flex-container{
+$sidebar-bg-color: #FAFAFA;
+.view-container {
+  min-height: 100%;
   width: 100%;
-}*/
+}
+
+mat-sidenav {
+  //min-height: calc(100vh - 67px);
+
+  background-color: $sidebar-bg-color;
+}
+
+mat-sidenav-content {
+}
+
+
+.content {
+  margin: 3.5vh 1.5vh auto;
+  min-height: calc(100vh - 67px - 1.2vh);
+}
+

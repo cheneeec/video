@@ -1,78 +1,34 @@
-$header-height: 80px;
+$header-bg-color: white;
 
-//search-input
-$search-input-container-width: 655px;
-$search-input-height: 42px;
-
-//user-status
-$user-status-margin-right: 45px;
-
-//半圆角
-@mixin half-rounded-corner($direction,$value:30px) {
-  border-top-#{$direction}-radius: $value;
-  border-bottom-#{$direction}-radius: $value;
+mat-toolbar {
+  background-color: $header-bg-color;
 }
 
-@mixin header-input($direction,$value:30px) {
-  @include half-rounded-corner($direction, $value);
+/*.menu-button {
+  min-width: 240px;
+}*/
+
+@mixin remove-input-style($color) {
   background-color: #FAFAFA;
   border: 1px solid #FAFAFA; /*去除阴影*/
-  &:focus{
+  &:focus {
     outline-style: none;
   }
 }
 
-.header {
-  height: $header-height; //110
-  background-color: white;
-}
-
-.search-input-container {
-
-}
-
-.search-input-icon {
-  position: absolute;
-  margin-left: 13px;
-  margin-top: 10px;
-  font-size: 29px;
+.search-container {
+ border: 2px solid #FAFAFA;
+  font-style: inherit;
 }
 
 .search-input {
-  height: $search-input-height;
-  text-align: start;
-  width: 490px;
-  padding-left: 59px;
-  font-size: 20px;
-
-  @include header-input(left);
-
+  //width: 460px;
+  line-height: 28px;
+  @include remove-input-style(#FAFAFA);
 }
 
-.search-select {
-
-  position: absolute;
-  height: $search-input-height+4px;
-  width: 120px;
-  @include header-input(right);
-
-  border-left-color: black;
-  margin-left: -1px;
-  padding-left: 23px;
-
-  font-size: inherit; //设置字体
-
-}
-
-.user-status {
-
-}
-
-.username {
-  margin-left: 40px;
-  margin-right: 20px;
-}
-
-.category-tip {
-  font-size: 25px;
+.user-button {
+  div, button {
+    margin-left: 18px;
+  }
 }
