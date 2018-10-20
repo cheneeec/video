@@ -4,8 +4,11 @@ import {ItemsComponent} from "./items/items.component";
 
 const routes: Routes = [
     {
-        path: 'items',
-        component: ItemsComponent
+        path: 'movie',
+        component: ItemsComponent,
+        data:{
+            category:'movie'
+        }
     }
 ];
 
