@@ -1,34 +1,39 @@
 $header-bg-color: white;
+$header-margin-bottom: 0px;
+
+$header-primary-color: #FAFAFA;
+header {
+  margin-bottom: 4 $header-margin-bottom;
+}
 
 mat-toolbar {
   background-color: $header-bg-color;
 }
 
-/*.menu-button {
-  min-width: 240px;
-}*/
-
 @mixin remove-input-style($color) {
-  background-color: #FAFAFA;
-  border: 1px solid #FAFAFA; /*去除阴影*/
+  background-color: $color;
+  border: 1px solid $color; /*去除阴影*/
   &:focus {
     outline-style: none;
   }
 }
 
 .search-container {
- border: 2px solid #FAFAFA;
-  font-style: inherit;
+  border: 3px solid $header-primary-color;
 }
 
 .search-input {
   //width: 460px;
   line-height: 28px;
-  @include remove-input-style(#FAFAFA);
+  @include remove-input-style($header-primary-color);
 }
 
 .user-button {
   div, button {
     margin-left: 18px;
   }
+}
+
+.user-avatar {
+  border-radius: 50%;
 }
