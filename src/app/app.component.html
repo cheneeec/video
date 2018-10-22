@@ -1,5 +1,9 @@
 <div class="view-container">
+
     <app-header  (toggle)="sidebar.toggle();"></app-header>
+
+    <mat-progress-bar *ngIf="progressBarValue$|async as progressBarValue" color="accent" [value]="progressBarValue"></mat-progress-bar>
+
     <div class="view-container">
 
         <mat-sidenav-container>

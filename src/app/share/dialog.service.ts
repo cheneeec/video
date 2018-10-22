@@ -1,8 +1,6 @@
-import {Injectable} from '@angular/core';
-import {DialogRole, MatDialog} from "@angular/material";
-import {AlertComponent} from "./alert.component";
+import {Component, Inject, Injectable, OnInit} from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {Observable} from "rxjs";
-import {ConfirmComponent} from "./confirm.component";
 
 @Injectable({
     providedIn: 'root'
@@ -28,6 +26,66 @@ export class DialogService {
             disableClose:true
 
         }).afterClosed();
+    }
+
+}
+@Component({
+    selector: 'app-confirm',
+    template: `
+        <div>
+            <div mat-dialog-title>
+                {{data['title']}}
+            </div>
+            <mat-dialog-content style="text-align:start;">
+                {{data['content']}}
+            </mat-dialog-content>
+
+            <mat-dialog-actions class="button" style="float: right;">
+                <button mat-button color="accent" (click)="dialog.close(true);">{{data.confirmButton || '确认'}}</button>
+                <button mat-button color="accent" (click)="dialog.close(false);">{{data.closeButton || '关闭'}}</button>
+            </mat-dialog-actions>
+        </div>
+    `
+})
+export class ConfirmComponent implements OnInit {
+
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: { content: string, title?: string, closeButton?: string, confirmButton?: string },
+        public dialog: MatDialogRef<ConfirmComponent>
+    ) {
+    }
+
+    ngOnInit() {
+
+    }
+
+}
+
+@Component({
+    selector: 'app-alert',
+    template: `
+        <div>
+            <div mat-dialog-title>
+                {{data['title']}}
+            </div>
+            <mat-dialog-content style="text-align:start;">
+                {{data['content']}}
+            </mat-dialog-content>
+
+            <mat-dialog-actions class="button" style="float: right;">
+                <button mat-button color="accent" mat-dialog-close="">{{data.closeButton||'关闭'}}</button>
+            </mat-dialog-actions>
+        </div>
+    `
+})
+export class AlertComponent implements OnInit {
+
+    constructor(@Inject(MAT_DIALOG_DATA) public data:{ content: string, title?: string, closeButton?: string }) {
+
+    }
+
+
+    ngOnInit() {
     }
 
 }

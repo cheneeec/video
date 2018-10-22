@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map} from "rxjs/operators";
 import {MatIconRegistry} from "@angular/material";
+import {ProgressBarValueService} from "./share/progress-bar-value.service";
 
 @Component({
     selector: 'app-root',
@@ -11,7 +12,7 @@ import {MatIconRegistry} from "@angular/material";
 })
 export class AppComponent {
 
-
+    progressBarValue$: Observable<number>;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -19,13 +20,13 @@ export class AppComponent {
         );
 
 
-    constructor(private breakpointObserver: BreakpointObserver, private matIconRegistry: MatIconRegistry) {
+    constructor(private breakpointObserver: BreakpointObserver,
+                private matIconRegistry: MatIconRegistry,
+                private progressBarService: ProgressBarValueService) {
 
         this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
+        this.progressBarValue$= this.progressBarService.progressBarSubject;
     }
 
-    sidenavToggle():void{
-        alert(1);
-    }
 
 }

@@ -1,8 +1,11 @@
 $sidebar-bg-color: #FAFAFA;
+$container-margin-top:2px;
 
 .view-container {
   min-height: 100%;
   width: 100%;
+  margin-top: $container-margin-top;
+
 }
 
 mat-sidenav {
@@ -17,7 +20,6 @@ mat-sidenav-content {
 .content {
   margin: 3.5vh 1.5vh auto;
   min-height: calc(100vh - 67px - 1.2vh);
-
 
 }
 

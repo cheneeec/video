@@ -2,11 +2,20 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
     MatBadgeModule,
-    MatButtonModule, MatCardModule,
-    MatChipsModule, MatDialogModule, MatFormFieldModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatFormFieldModule,
     MatGridListModule,
-    MatIconModule, MatInputModule,
-    MatListModule, MatMenuModule, MatSidenavModule, MatSlideToggleModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
     MatToolbarModule
 } from "@angular/material";
 import {LayoutModule} from "@angular/cdk/layout";
@@ -14,8 +23,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import { AlertComponent } from './alert.component';
-import { ConfirmComponent } from './confirm.component';
+import {AlertComponent, ConfirmComponent} from "./dialog.service";
 
 @NgModule({
     imports: [
@@ -35,6 +43,8 @@ import { ConfirmComponent } from './confirm.component';
         MatChipsModule,
         LayoutModule,
         MatBadgeModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
         FlexLayoutModule,
 
 
@@ -61,6 +71,10 @@ import { ConfirmComponent } from './confirm.component';
         MatGridListModule,
         MatChipsModule,
         MatBadgeModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
+
+
         LayoutModule,
         FlexLayoutModule,
 
