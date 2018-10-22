@@ -1,17 +1,13 @@
-/*.item {
-
-  img {
-    border-radius: 10px;
-  }
-}*/
-
 .item-mouse-enter-active {
   border: red 3px groove;
 }
 
 mat-card {
-  max-width: 200px;
   margin-bottom: 20px;
+  max-width: 200px;
+  //height: ;
+  //width: 140px;
+  //height: 320px;
   &:hover {
     cursor: pointer;
   }
@@ -20,6 +16,10 @@ mat-card {
 .mat-card-title {
   font-size: 16px;
   font-weight: 400;
+}
+
+.mat-card-subtitle{
+
 }
 
 .play-info {

@@ -1,8 +1,8 @@
 <nav>
     <mat-nav-list>
         <mat-list-item>
-            <mat-icon mat-list-icon color="accent">home</mat-icon>
-            <span mat-line><a matLine href="" >首页</a></span>
+            <mat-icon mat-list-icon color="primary">home</mat-icon>
+            <span mat-line><a matLine href="">首页</a></span>
         </mat-list-item>
 
         <mat-list-item>
@@ -25,13 +25,13 @@
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-gamepad" color="primary"></mat-icon>
-            <a matLine href="">游戏</a>
+            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-gamepad" [color]="game.isActive?'accent':'primary'"></mat-icon>
+            <a matLine href=""  routerLinkActive #game="routerLinkActive">游戏</a>
         </mat-list-item>
 
         <mat-list-item>
-            <mat-icon mat-list-icon color="primary">movie</mat-icon>
-            <a matLine routerLink="movie" [queryParams]="{size:16}">电影</a>
+            <mat-icon mat-list-icon [color]="movie.isActive?'accent':'primary'">movie</mat-icon>
+            <a matLine routerLink="movie" [queryParams]="{size:16}"  routerLinkActive #movie="routerLinkActive">电影</a>
         </mat-list-item>
 
         <mat-list-item>
@@ -39,9 +39,9 @@
             <a matLine href="">电视节目</a>
         </mat-list-item>
 
-        <mat-list-item>
-            <mat-icon mat-list-icon fontSet="fontawesome" fontIcon="fa-newspaper-o" color="primary"></mat-icon>
-            <a matLine routerLink="animation" [queryParams]="{size:16}">动漫</a>
+        <mat-list-item >
+            <mat-icon  mat-list-icon fontSet="fontawesome" fontIcon="fa-newspaper-o" [color]="animation.isActive?'accent':'primary'" ></mat-icon>
+            <a matLine  routerLink="animation" routerLinkActive #animation="routerLinkActive" [queryParams]="{size:16}">动漫</a>
         </mat-list-item>
 
         <mat-list-item>

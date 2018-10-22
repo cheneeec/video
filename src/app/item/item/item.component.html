@@ -1,4 +1,4 @@
-
+<!--
 <mat-card appMouseEnterAddClass="['mat-elevation-z8']" title="">
     <div>
         <div class="image-container">
@@ -7,13 +7,33 @@
             <span class="play-info"></span>
         </div>
         <mat-card-title-group>
-            <mat-card-title>{{item['title']}}</mat-card-title>
-            <mat-card-subtitle>小保安沈剑心的大侠路</mat-card-subtitle>
+            <mat-card-title [title]="item['title']">{{item['title']}}</mat-card-title>
+            <mat-card-subtitle *ngIf="item['videoInfo']" [title]="item['videoInfo']">
+                {{item['videoInfo'].length>39?((item['videoInfo']|slice:0:36)+'...'):item['videoInfo']}}
+            </mat-card-subtitle>
         </mat-card-title-group>
 
     </div>
 
-  <!--  <mat-card-actions >
+</mat-card>
+-->
+<mat-card appMouseEnterAddClass="['mat-elevation-z8']" title="">
+    <div>
+        <div class="image-container">
+
+            <img mat-card-image="" [src]="item['image']"/>
+            <span class="play-info"></span>
+        </div>
+        <mat-card-title-group>
+            <mat-card-title [title]="item['title']">{{item['title']}}</mat-card-title>
+           <!-- <mat-card-subtitle *ngIf="item['videoInfo']" [title]="item['videoInfo']">
+                {{item['videoInfo']}}
+            </mat-card-subtitle>-->
+        </mat-card-title-group>
+
+    </div>
+
+    <!--<mat-card-actions>
         <button class="mdui-btn mdui-ripple" mat-button="">播放</button>
         <button class="mdui-btn mdui-ripple" mat-button>举报</button>
     </mat-card-actions>-->

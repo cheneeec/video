@@ -9,6 +9,13 @@ const routes: Routes = [
         data:{
             category:'movie'
         }
+    },
+    {
+        path: 'animation',
+        component: ItemsComponent,
+        data:{
+            category:'animation'
+        }
     }
 ];
 
