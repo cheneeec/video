@@ -1,8 +1,11 @@
 $sidebar-width: 300px;
 
-
 nav {
   max-width: $sidebar-width;
   min-width: $sidebar-width - 60px;
 
+}
+
+.mat-list-item {
+  font-size: 0.9rem;
 }

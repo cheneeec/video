@@ -1,3 +1,3 @@
-<div id="items" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutAlign.lt-sm="space-around start" *ngIf="itemsPageResponse$|async as itemsPageResponse">
+<div id="items" fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutAlign.lt-sm="space-around start" fxLayoutGap="1%" *ngIf="itemsPageResponse$|async as itemsPageResponse">
     <app-item *ngFor="let item of itemsPageResponse.content" fxFlexAlign="center" [item]="item"></app-item>
 </div>
