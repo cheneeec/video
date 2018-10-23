@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {switchMap, tap} from "rxjs/operators";
-import {interval, Observable} from "rxjs";
+import {switchMap} from "rxjs/operators";
+import { Observable} from "rxjs";
 import {ResponsePage} from "../../domain/response-page.model";
-import {ProgressBarValueService} from "../../share/progress-bar-value.service";
+import {ScrollDispatcher} from "@angular/cdk/overlay";
 
 @Component({
     selector: 'app-items',
@@ -17,7 +17,8 @@ export class ItemsComponent implements OnInit {
 
     constructor(private itemsService: ItemsService,
                 private activatedRoute: ActivatedRoute,
-                private progressBarService: ProgressBarValueService) {
+                private elementRef: ElementRef,
+                private scrollDispatcher: ScrollDispatcher) {
 
     }
 
@@ -25,15 +26,25 @@ export class ItemsComponent implements OnInit {
 
         this.itemsPageResponse$ = this.activatedRoute.queryParams
             .pipe(
-                tap(() => this.progressBarService.loading()),
                 switchMap(queryParams => this.itemsService.findAll(
                     this.activatedRoute.snapshot.data['category'], {
                         page: queryParams['page'],
                         size: queryParams['size']
                     })
-                ),
-                tap(()=>this.progressBarService.loadCompleted())
+                )
             );
+
+        setTimeout(()=>{
+            console.log(this.elementRef);
+            console.log(this.scrollDispatcher.scrollContainers);
+            this.scrollDispatcher
+                .ancestorScrolled(this.elementRef,800)
+                .subscribe((scrollable) => {
+                    console.log('發生scroll了，來源為：');
+                    console.log(scrollable)
+                });
+        },2000)
+
 
     }
 

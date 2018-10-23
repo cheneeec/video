@@ -24,6 +24,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {AlertComponent, ConfirmComponent} from "./dialog.service";
+import {ScrollDispatchModule} from "@angular/cdk/scrolling";
 
 @NgModule({
     imports: [
@@ -41,6 +42,9 @@ import {AlertComponent, ConfirmComponent} from "./dialog.service";
         MatFormFieldModule,
         MatGridListModule,
         MatChipsModule,
+
+        ScrollDispatchModule,
+
         LayoutModule,
         MatBadgeModule,
         MatProgressSpinnerModule,
@@ -71,6 +75,7 @@ import {AlertComponent, ConfirmComponent} from "./dialog.service";
         MatGridListModule,
         MatChipsModule,
         MatBadgeModule,
+        ScrollDispatchModule,
         MatProgressSpinnerModule,
         MatProgressBarModule,
 

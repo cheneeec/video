@@ -1,30 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import {CoreModule} from "./core/core.module";
+import {AppComponent} from './app.component';
 import {ShareModule} from "./share/share.module";
 import {ItemModule} from "./item/item.module";
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {ProgressBarValueInterceptor} from "./ProgressBarValueInterceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-      ShareModule,
-      BrowserModule,
-      CoreModule,
-      ItemModule,
-      LayoutModule,
-      MatToolbarModule,
-      MatButtonModule,
-      MatSidenavModule,
-      MatIconModule,
-      MatListModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        ShareModule,
+        BrowserModule,
+        CoreModule,
+        ItemModule,
+    ],
+    providers: [
+        {
+            useClass: ProgressBarValueInterceptor,
+            provide: HTTP_INTERCEPTORS,
+            multi: true
+        },
+        /*{
+            useValue:['/v1/api.aa']
+        }*/
+
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

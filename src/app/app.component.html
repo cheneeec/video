@@ -1,8 +1,8 @@
-<div class="view-container">
+<div class="view-container" >
 
-    <app-header  (toggle)="sidebar.toggle();"></app-header>
+    <app-header  (toggle)="sidebar.toggle();" ></app-header>
 
-    <mat-progress-bar *ngIf="progressBarValue$|async as progressBarValue" color="accent" [value]="progressBarValue"></mat-progress-bar>
+    <mat-progress-bar *ngIf="(progressBarValue$|async) as progressBarValue" color="primary" [value]="progressBarValue"></mat-progress-bar>
 
     <div class="view-container">
 
@@ -14,15 +14,20 @@
 
             </mat-sidenav>
 
-            <mat-sidenav-content>
-                <div class="content">
+            <mat-sidenav-content >
+                <div class="content" cdk-scrollable>
                     <router-outlet></router-outlet>
                 </div>
             </mat-sidenav-content>
 
+
+
         </mat-sidenav-container>
     </div>
 </div>
+
+
+
 
 
 
