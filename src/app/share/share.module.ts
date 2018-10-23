@@ -16,7 +16,6 @@ import {
     MatSlideToggleModule,
     MatToolbarModule
 } from "@angular/material";
-import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
 import {AlertComponent, ConfirmComponent} from "./dialog.service";
