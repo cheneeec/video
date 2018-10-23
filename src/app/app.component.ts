@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     constructor(private breakpointObserver: BreakpointObserver,
                 private matIconRegistry: MatIconRegistry,
                 private progressBarService: ProgressBarValueService,
-
+                private scrollDispatcher: ScrollDispatcher
                 ) {
 
         this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
@@ -34,12 +34,6 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
-        setTimeout(()=>{
-            console.log(document.getElementsByTagName('body'));
-        },2000);
-        console.log(document.getElementsByTagName('body'));
-        fromEvent(document.getElementsByTagName('body')[0],'scroll')
-            .subscribe(v=>console.log(v))
 
     }
 

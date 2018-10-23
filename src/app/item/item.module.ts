@@ -7,7 +7,7 @@ import { ItemsComponent } from './items/items.component';
 @NgModule({
     imports: [
         ShareModule,
-        ItemRoutingModule
+        ItemRoutingModule,
     ],
     declarations: [ItemComponent, ItemsComponent]
 })

@@ -7,6 +7,7 @@ import {ItemModule} from "./item/item.module";
 import {ProgressBarValueInterceptor} from "./ProgressBarValueInterceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {CoreModule} from "./core/core.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import {CoreModule} from "./core/core.module";
     imports: [
         ShareModule,
         BrowserModule,
+        BrowserAnimationsModule,
         CoreModule,
         ItemModule,
     ],

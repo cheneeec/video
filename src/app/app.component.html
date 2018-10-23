@@ -6,7 +6,7 @@
 
     <div class="view-container">
 
-        <mat-sidenav-container>
+        <mat-sidenav-container >
 
             <mat-sidenav #sidebar  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                          [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
@@ -15,7 +15,7 @@
             </mat-sidenav>
 
             <mat-sidenav-content >
-                <div class="content" cdk-scrollable>
+                <div id="content">
                     <router-outlet></router-outlet>
                 </div>
             </mat-sidenav-content>
