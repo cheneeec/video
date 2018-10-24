@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {map, switchMap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {debounceTime, distinct, filter, map, switchMap, tap} from "rxjs/operators";
+import {fromEvent, Observable} from "rxjs";
 import {CdkScrollable, ScrollDispatcher} from "@angular/cdk/overlay";
 import {ResponsePage} from "../../domain/response-page.model";
 
@@ -15,11 +15,12 @@ export class ItemsComponent implements OnInit {
 
     items$: Observable<object[]>;
 
-    page$: Observable<number>;
+    currentPage$: Observable<number>;
 
     constructor(private itemsService: ItemsService,
                 private activatedRoute: ActivatedRoute,
-                private scrollDispatcher: ScrollDispatcher) {
+                private scrollDispatcher: ScrollDispatcher,
+                private elementRef: ElementRef) {
     }
 
 
@@ -31,36 +32,24 @@ export class ItemsComponent implements OnInit {
             );
 
         this.items$ = responsePage$.pipe(map(responsePage => responsePage.content));
-        this.page$ = responsePage$.pipe(map(responsePage => responsePage.number));
+        this.currentPage$ = responsePage$.pipe(map(responsePage => responsePage.number));
 
         this.scrollDispatcher
             .scrolled(800)
-            .subscribe((scrollable: CdkScrollable) => {
-                console.log('發生scroll了，來源為：');
-                console.log('body scrollHeight:' + document.body.scrollHeight);
-                console.log('body offsetHeight:' + document.body.offsetHeight);
-                console.log('body clientHeight:' + document.body.clientHeight);
-                console.log('documentElement scrollHeight:' + document.documentElement.scrollHeight);
-                console.log('documentElement offsetHeight:' + document.documentElement.offsetHeight);
-                console.log('scrollingElement clientHeight:' + document.scrollingElement.clientHeight);
-                console.log('scrollingElement scrollHeight:' + document.scrollingElement.scrollHeight);
+            .pipe(
+                map(() => window.scrollY), //取Y值
+                filter(current => current >= document.body.clientHeight - window.innerHeight), //过滤视窗外的滚动
+                // distinct(),//去重
+                map(y => Math.ceil((y + window.innerHeight) / 2727)) //获取页数
+            )
+            .subscribe((scrollable) => {
+                console.log(document.documentElement.scrollHeight);//代表整个滚动条多长
+                console.log(document.getElementsByTagName('mat-sidenav-content').item(0));
+                console.log(document.getElementsByTagName('mat-sidenav-content').item(0).scrollHeight);
+                console.log("=========")
 
-                console.log('===========');
-                console.log(document.body.scrollTop);
-                console.log(document.body.scrollWidth);
-                console.log(document.body.scrollWidth + document.body.scrollTop);
-                console.log("==============================");
-
-                // console.log(+document.getElementById('content').scrollHeight)
-                /* if(document.getElementById('content').scrollHeight>900){
-                     this.doHttpRequest({
-                         page:1,
-                         size:16
-                     }).subscribe(c=>console.log(c))
-                 }*/
-
+                console.log(document.getElementsByTagName('mat-sidenav-content').item(0).scrollHeight + 64);
             });
-
 
     }
 
@@ -72,6 +61,10 @@ export class ItemsComponent implements OnInit {
                 size: size
             })
     }
+
+
+
+
 
 
 }

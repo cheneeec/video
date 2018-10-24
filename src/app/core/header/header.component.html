@@ -1,19 +1,19 @@
-<header class="mat-elevation-z1" >
+<header class="mat-elevation-z1">
     <mat-toolbar>
 
-        <mat-toolbar-row  fxLayout="row" fxLayoutAlign="space-between center" >
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
 
             <div class="menu-button">
-                <button mat-icon-button (click)="toggle.emit()" >
+                <button mat-icon-button (click)="toggle.emit();">
                     <mat-icon>menu</mat-icon>
                 </button>
             </div>
 
 
-
-            <div class="search-container"   fxHide.lt-sm [ngStyle.sm]="{width: '240px'}" [ngStyle.gt-sm]="{width: '490px'}" >
+            <div class="search-container" fxHide.lt-sm [ngStyle.sm]="{width: '240px'}"
+                 [ngStyle.gt-sm]="{width: '490px'}">
                 <input type="text" class=
-                        "search-input" placeholder="" fxFlex="1 1 auto" >
+                        "search-input" placeholder="" fxFlex="1 1 auto">
                 <button mat-icon-button="" matSuffix>
                     <mat-icon>search</mat-icon>
                 </button>
@@ -29,7 +29,7 @@
                 </div>
 
 
-                <div >
+                <div>
                     <img mat-card-avatar class="user-avatar" src="http://placehold.it/45x45" alt="">
                 </div>
 

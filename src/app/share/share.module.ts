@@ -1,15 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
-    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatListModule,
+    MatListModule, MatMenuModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
@@ -34,7 +32,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
         MatSlideToggleModule,
         MatDialogModule,
         MatFormFieldModule,
-
+        MatMenuModule,
 
         MatProgressSpinnerModule,
         MatProgressBarModule,
@@ -58,7 +56,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
         MatSlideToggleModule,
         MatDialogModule,
         MatFormFieldModule,
-
+        MatMenuModule,
 
         MatProgressSpinnerModule,
         MatProgressBarModule,

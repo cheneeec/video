@@ -1,29 +1,26 @@
-<div class="view-container" >
+<div class="view-container">
 
-    <app-header  (toggle)="sidebar.toggle();" ></app-header>
+    <app-header (toggle)="sidebar.toggle();"></app-header>
 
-    <mat-progress-bar *ngIf="(progressBarValue$|async) as progressBarValue" color="primary" [value]="progressBarValue"></mat-progress-bar>
+    <mat-progress-bar *ngIf="(progressBarValue$|async) as progressBarValue" color="primary"
+                      [value]="progressBarValue"></mat-progress-bar>
 
-    <div class="view-container">
 
-        <mat-sidenav-container >
+        <mat-sidenav-container>
 
-            <mat-sidenav #sidebar  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+            <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                          [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+
                 <app-sidebar></app-sidebar>
 
             </mat-sidenav>
 
-            <mat-sidenav-content >
-                <div id="content">
-                    <router-outlet></router-outlet>
-                </div>
+            <mat-sidenav-content>
+                <router-outlet></router-outlet>
             </mat-sidenav-content>
 
 
-
         </mat-sidenav-container>
-    </div>
 </div>
 
 
