@@ -10,17 +10,15 @@
 
             <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
                          [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-
                 <app-sidebar></app-sidebar>
-
             </mat-sidenav>
 
             <mat-sidenav-content>
                 <router-outlet></router-outlet>
             </mat-sidenav-content>
 
-
         </mat-sidenav-container>
+    <!--<mat-spinner mode="indeterminate"></mat-spinner>-->
 </div>
 
 
