@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ShareModule} from "./share/share.module";
 import {ItemModule} from "./item/item.module";
-import {ProgressBarValueInterceptor} from "./ProgressBarValueInterceptor";
+import {ProgressVisibleInterceptor} from "./progress-visible-interceptor.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {CoreModule} from "./core/core.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -22,14 +22,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ],
     providers: [
         {
-            useClass: ProgressBarValueInterceptor,
+            useClass: ProgressVisibleInterceptor,
             provide: HTTP_INTERCEPTORS,
             multi: true
-        },
-        /*{
-            useValue:['/v1/api.aa']
-        }*/
-
+        }
     ],
     bootstrap: [AppComponent]
 })

@@ -6,19 +6,23 @@
                       [value]="progressBarValue"></mat-progress-bar>
 
 
-        <mat-sidenav-container>
+    <mat-sidenav-container>
 
-            <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
-                <app-sidebar></app-sidebar>
-            </mat-sidenav>
+        <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+            <app-sidebar></app-sidebar>
+        </mat-sidenav>
 
-            <mat-sidenav-content>
-                <router-outlet></router-outlet>
-            </mat-sidenav-content>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
 
-        </mat-sidenav-container>
-    <!--<mat-spinner mode="indeterminate"></mat-spinner>-->
+    </mat-sidenav-container>
+
+    <div class="spinner" align="center" [hidden]="!(progressSpinnerStatus$|async)">
+        <mat-spinner mode="indeterminate" ></mat-spinner>
+    </div>
+
 </div>
 
 

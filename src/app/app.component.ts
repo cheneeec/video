@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import { map} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {MatIconRegistry} from "@angular/material";
 import {ProgressBarValueService} from "./share/progress-bar-value.service";
+import {ProgressSpinnerStatusService} from "./share/progress-spinner-status.service";
 
 @Component({
     selector: 'app-root',
@@ -14,6 +15,11 @@ export class AppComponent implements OnInit {
 
     progressBarValue$: Observable<number> = this.progressBarService.progressBarValue;
 
+    progressSpinnerStatus$: Observable<boolean> = this.progressSpinnerStatusService.progressSpinnerStatus;
+
+
+    viewContainerHeight: number;
+
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
             map(result => result.matches)
@@ -22,7 +28,8 @@ export class AppComponent implements OnInit {
 
     constructor(private breakpointObserver: BreakpointObserver,
                 private matIconRegistry: MatIconRegistry,
-                private progressBarService: ProgressBarValueService
+                private progressBarService: ProgressBarValueService,
+                private progressSpinnerStatusService: ProgressSpinnerStatusService
     ) {
 
         this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
@@ -31,8 +38,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
-
-
+        this.viewContainerHeight = document.getElementsByClassName('view-container').item(0).scrollHeight;
 
     }
 

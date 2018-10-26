@@ -1,16 +1,17 @@
-import {Injectable} from '@angular/core';
-import {interval, Observable, Subject, timer} from "rxjs";
-import {delayWhen, filter, map, switchMap, take, takeUntil, timeInterval} from "rxjs/operators";
+import {Injectable, OnDestroy} from '@angular/core';
+import {interval, Observable, Subject} from "rxjs";
+import {filter, map, take, takeUntil} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProgressBarValueService {
+export class ProgressBarValueService implements OnDestroy {
 
     private _progressBarValueSubject: Subject<number> = new Subject<number>();
     private _progressBarValue$: Observable<number> = this._progressBarValueSubject.asObservable();
 
-    constructor() {}
+    constructor() {
+    }
 
 
     loading(): void {
@@ -30,5 +31,9 @@ export class ProgressBarValueService {
 
     get progressBarValue() {
         return this._progressBarValue$;
+    }
+
+    ngOnDestroy(): void {
+        this._progressBarValueSubject.unsubscribe();
     }
 }

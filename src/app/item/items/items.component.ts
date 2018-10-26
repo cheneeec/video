@@ -1,20 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {filter, map, switchMap, tap} from "rxjs/operators";
-import {Observable} from "rxjs";
+import {distinct, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
-import {ResponsePage} from "../../domain/response-page.model";
 
 @Component({
     selector: 'app-items',
     templateUrl: './items.component.html',
     styleUrls: ['./items.component.scss']
 })
-export class ItemsComponent implements OnInit {
+export class ItemsComponent implements OnInit, OnDestroy {
 
-    responsePage$: Observable<ResponsePage<object>>;
 
+    items: object[] = [];
+
+    private nextPage: number = 0;
+
+    private currentSize = 16;
+
+    lastPage: boolean;
 
 
     viewContainer = document.getElementsByClassName('view-container').item(0);
@@ -28,34 +32,47 @@ export class ItemsComponent implements OnInit {
 
     ngOnInit() {
 
-        this.responsePage$ = this.activatedRoute.queryParams
-            .pipe(
-                switchMap(queryParams => this.doHttpRequest(queryParams['page'], queryParams['size'])),
-            );
+        const activatedRouteSnapshot = this.activatedRoute.snapshot;
+        const category = activatedRouteSnapshot.data['category'];
+        const queryParams = activatedRouteSnapshot.queryParams;
+
+        this.itemsService.findAll(category,
+            {
+                page: queryParams['page'],
+                size: queryParams['size']
+            }).subscribe(responsePage => {
+            this.items = responsePage.content;
+            this.nextPage = ++responsePage.number;
+            this.currentSize = responsePage.size;
+            this.lastPage = responsePage.last;
+        });
+
 
 
         this.scrollDispatcher
             .scrolled(800)
             .pipe(
-                filter(() => document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20),
-         /*       switchMap(() => this.currentPage$.pipe(map(currentPage => currentPage + 1))),
-                switchMap(page => this.doHttpRequest(page)),
-                map(pageResponse => pageResponse.content),*/
+                filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20) && !this.lastPage),
+                map(() => {
+                    return this.nextPage
+                }),
+                distinctUntilChanged(),
+                switchMap(requestPage => this.itemsService.findAll(category, {
+                    page: requestPage,
+                    size: this.currentSize
+                })),
             )
-            .subscribe(page => {
-                console.log(page);
+            .subscribe(pageResponse => {
+                pageResponse.content.forEach(item => this.items.push(item));
+                this.nextPage = ++pageResponse.number;
+                this.lastPage = pageResponse.last;
             });
 
     }
 
 
-    private doHttpRequest(page?: number, size?: number): Observable<ResponsePage<object>> {
-        console.log(page, 'page');
-        return this.itemsService.findAll(
-            this.activatedRoute.snapshot.data['category'], {
-                page: page,
-                size: size
-            })
+    ngOnDestroy(): void {
+
     }
 
 
