@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {distinct, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
+import {distinctUntilChanged, filter, map, switchMap, tap} from "rxjs/operators";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
+import {ProgressSpinnerStatusService} from "../../share/progress-spinner-status.service";
 
 @Component({
     selector: 'app-items',
@@ -26,7 +27,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     constructor(private itemsService: ItemsService,
                 private activatedRoute: ActivatedRoute,
-                private scrollDispatcher: ScrollDispatcher) {
+                private scrollDispatcher: ScrollDispatcher,
+                private  progressSpinnerStatusService: ProgressSpinnerStatusService) {
     }
 
 
@@ -53,10 +55,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
             .scrolled(800)
             .pipe(
                 filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20) && !this.lastPage),
-                map(() => {
-                    return this.nextPage
-                }),
+                map(() => this.nextPage),
                 distinctUntilChanged(),
+                tap(()=>this.progressSpinnerStatusService.loading()),
                 switchMap(requestPage => this.itemsService.findAll(category, {
                     page: requestPage,
                     size: this.currentSize
@@ -66,6 +67,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
                 pageResponse.content.forEach(item => this.items.push(item));
                 this.nextPage = ++pageResponse.number;
                 this.lastPage = pageResponse.last;
+                this.progressSpinnerStatusService.loadCompleted();
             });
 
     }

@@ -28,8 +28,7 @@ export class ProgressVisibleInterceptor implements HttpInterceptor {
             ProgressVisibleInterceptor.judgeRequestParams(PROGRESS_SPINNER_RULE, request);
 
 
-        if (!(showProgressBar||showProgressSpinner)) {
-            console.log('go');
+        if (!(showProgressBar || showProgressSpinner)) {
             return next.handle(request);
         } else {
             if (showProgressBar) {

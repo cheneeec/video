@@ -3,17 +3,17 @@
 
         <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
 
-            <div class="menu-button">
-                <button mat-icon-button (click)="toggle.emit();">
+            <div class="menu-button ">
+                <button class="mat-elevation-z1" mat-icon-button (click)="toggle.emit();">
                     <mat-icon>menu</mat-icon>
                 </button>
             </div>
 
 
-            <div class="search-container" fxHide.lt-sm [ngStyle.sm]="{width: '240px'}"
-                 [ngStyle.gt-sm]="{width: '490px'}">
+            <div class="search-container mat-elevation-z1" fxHide.lt-sm [ngStyle.sm]="{width: '240px'}"
+                 [ngStyle.gt-sm]="{width: '630px'}">
                 <input type="text" class=
-                        "search-input" placeholder="" fxFlex="1 1 auto">
+                        "search-input" placeholder="" fxFlex="1 1 100%">
                 <button mat-icon-button="" matSuffix>
                     <mat-icon>search</mat-icon>
                 </button>
