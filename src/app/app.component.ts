@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
     progressSpinnerStatus$: Observable<boolean> = this.progressSpinnerStatusService.progressSpinnerStatus;
 
 
-    viewContainerHeight: number;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
         .pipe(
@@ -29,16 +28,12 @@ export class AppComponent implements OnInit {
     constructor(private breakpointObserver: BreakpointObserver,
                 private matIconRegistry: MatIconRegistry,
                 private progressBarService: ProgressBarValueService,
-                private progressSpinnerStatusService: ProgressSpinnerStatusService
-    ) {
-
+                private progressSpinnerStatusService: ProgressSpinnerStatusService) {
         this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-
     }
 
 
     ngOnInit(): void {
-        this.viewContainerHeight = document.getElementsByClassName('view-container').item(0).scrollHeight;
 
     }
 

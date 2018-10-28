@@ -56,6 +56,7 @@ export class ProgressVisibleInterceptor implements HttpInterceptor {
 
     }
 
+
     private static judgeRequestMethod(rule: progressJudgeRule, request: HttpRequest<any>): boolean {
         return rule.method.includes(request.method);
     }
@@ -76,6 +77,8 @@ export class ProgressVisibleInterceptor implements HttpInterceptor {
         }
         return params;
     }
+
+
 }
 
 /**

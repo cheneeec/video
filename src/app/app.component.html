@@ -18,9 +18,9 @@
         </mat-sidenav-content>
 
     </mat-sidenav-container>
-
+    <h1>{{progressSpinnerStatus$|async}}</h1>
     <div class="spinner" align="center" [hidden]="!(progressSpinnerStatus$|async)">
-        <mat-spinner mode="indeterminate" ></mat-spinner>
+        <mat-spinner mode="indeterminate"></mat-spinner>
     </div>
 
 </div>
