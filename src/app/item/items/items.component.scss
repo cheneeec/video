@@ -1,4 +1,10 @@
+$spinner-height: 120px;
 
 .no-more-tip {
   margin-bottom: 5%;
 }
+
+.spinner {
+  height: $spinner-height;
+}
+

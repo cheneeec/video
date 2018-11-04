@@ -6,3 +6,9 @@
 <div align="center" *ngIf="lastPage" class="no-more-tip">
     没有更多了
 </div>
+
+<div class="spinner" *ngIf="!lastPage" align="center">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+</div>
+
+

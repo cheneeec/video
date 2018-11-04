@@ -3,14 +3,12 @@ import {Observable} from 'rxjs';
 import {tap} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 import {ProgressBarValueService} from "./share/progress-bar-value.service";
-import {ProgressSpinnerStatusService} from "./share/progress-spinner-status.service";
 
 @Injectable()
 export class ProgressVisibleInterceptor implements HttpInterceptor {
 
 
-    constructor(private progressBarValueService: ProgressBarValueService,
-                private  progressSpinnerStatusService: ProgressSpinnerStatusService) {
+    constructor(private progressBarValueService: ProgressBarValueService) {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -35,19 +33,19 @@ export class ProgressVisibleInterceptor implements HttpInterceptor {
                 this.progressBarValueService.loading();
             }
 
-            if (showProgressSpinner) {
+           /* if (showProgressSpinner) {
                 this.progressSpinnerStatusService.loading();
             }
-
+*/
             return next.handle(request).pipe(
                 tap(event => {
                     if (event instanceof HttpResponse) {
                         if (showProgressBar) {
                             this.progressBarValueService.loadCompleted();
                         }
-                        if (showProgressSpinner) {
+                      /*  if (showProgressSpinner) {
                             this.progressSpinnerStatusService.loadCompleted();
-                        }
+                        }*/
                     }
                 })
             );
