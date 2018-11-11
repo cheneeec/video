@@ -11,15 +11,13 @@ mat-sidenav-container {
 mat-sidenav {
   background-color: $sidebar-bg-color;
   min-height: calc(100vh - 67px);
-
 }
 
 mat-sidenav-content {
-  //margin-top: 1vh;
-  //margin-right: 0.8vh;
   padding: 2vh 3vh;
   min-height: calc(100vh - 67px - 1vh);
   background-color: white;
 }
+
 
 

@@ -2,10 +2,10 @@
 
     <vg-overlay-play></vg-overlay-play>
 
-   <!-- <vg-scrub-bar>
-        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-    </vg-scrub-bar>-->
+    <!-- <vg-scrub-bar>
+         <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+     </vg-scrub-bar>-->
 
     <vg-controls>
         <vg-play-pause></vg-play-pause>
@@ -27,3 +27,16 @@
     </video>
 
 </vg-player>
+
+<div *ngIf="currentEpisode">
+    <div class="play-title">
+        <h3>{{currentEpisode.title}}</h3>
+    </div>
+    <div class="play-description">
+        <strong class="light-font" *ngIf="currentEpisode.description">
+            简介:
+        </strong>
+        {{currentEpisode.description}}
+    </div>
+</div>
+

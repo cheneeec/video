@@ -18,6 +18,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MouseEnterAddClass} from "./mouse-enter-add-class.directive";
 import {AlertComponent, ConfirmComponent} from "./dialog.service";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import { PlayTimePipe } from './play-time.pipe';
 
 @NgModule({
     imports: [
@@ -66,11 +67,14 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 
         HttpClientModule,
 
-        //custom add
-        MouseEnterAddClass
+        //Directive
+        MouseEnterAddClass,
+
+        //Pipe
+        PlayTimePipe
 
     ],
-    declarations: [MouseEnterAddClass, AlertComponent, ConfirmComponent],
+    declarations: [MouseEnterAddClass, AlertComponent, ConfirmComponent, PlayTimePipe],
     entryComponents:[AlertComponent,ConfirmComponent]
 })
 export class ShareModule {

@@ -1,9 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {IPlayable} from "videogular2/src/core/vg-media/i-playable";
-import {ActivatedRoute} from "@angular/router";
+import {Component, Input, OnInit} from '@angular/core';
 import {PlayerService} from "./player.service";
-import {filter, map, switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {Episode} from "../../domain/episode.model";
 
 @Component({
     selector: 'app-player',
@@ -13,21 +11,25 @@ import {Observable} from "rxjs";
 export class PlayerComponent implements OnInit {
 
 
+    currentEpisode: Episode;
+
     value$: Observable<string[]>;
 
-    constructor(private activatedRoute: ActivatedRoute,
-                private playerService: PlayerService) {
+    constructor(private playerService: PlayerService) {
     }
 
 
     ngOnInit() {
-        this.value$ = this.activatedRoute.queryParams
-            .pipe(
-                map(q => q['v']),
-                filter(v => !!v),
-                switchMap(v => this.playerService.parsePlayValue(v))
-            );
 
+
+    }
+
+    @Input('currentEpisode')
+    set _currentEpisode(currentEpisode: Episode): void {
+        if (currentEpisode) {
+            this.currentEpisode = currentEpisode;
+            this.value$ = this.playerService.parsePlayValue(currentEpisode.playValue);
+        }
     }
 
 }

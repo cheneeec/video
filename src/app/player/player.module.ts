@@ -8,9 +8,11 @@ import {VgControlsModule} from "videogular2/controls";
 import {VgOverlayPlayModule} from "videogular2/overlay-play";
 import {VgBufferingModule} from "videogular2/buffering";
 import { PlayerComponent } from './player/player.component';
+import { PlayerListComponent } from './player-list/player-list.component';
+import { WatchComponent } from './watch/watch.component';
 
 @NgModule({
-    declarations: [PlayerComponent],
+    declarations: [PlayerComponent, PlayerListComponent, WatchComponent],
     imports: [
         ShareModule,
         PlayerRoutingModule,

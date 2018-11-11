@@ -15,12 +15,7 @@ export class AppComponent implements OnInit {
     progressBarValue$: Observable<number> = this.progressBarService.progressBarValue;
 
 
-
-
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-        .pipe(
-            map(result => result.matches)
-        );
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe( map(result => result.matches));
 
 
     constructor(private breakpointObserver: BreakpointObserver,

@@ -1,0 +1,44 @@
+<section class="play-list-container" role="main" *ngIf="episodes.length; else loading">
+
+     <div class="next-play-list">
+         <span>接下来播放</span>
+
+         <mat-slide-toggle labelPosition="before" class="float-right">
+             <small class="light-font">自动播放</small>
+         </mat-slide-toggle>
+     </div>
+
+    <ul role="list" class="play-list" #playList>
+        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode==currentEpisode,' hover-active':episode!=currentEpisode}">
+            <div fxLayout="row" (click)="playEpisode(episode);">
+                <div class="video-img">
+                    <!--http://placehold.it/168x100-->
+                    <img  [src]="episode['image']" [alt]="episode['title']">
+                    <div class="play-time"><span class="play-info">{{(episode['timeLength']|playTime)}}</span> </div>
+                </div>
+
+                <div class="info">
+                    <div class="title">{{episode['title']}}</div>
+                    <div class="video-belong light-font">
+                        <small>
+                            {{episode['shortDescription']}}
+                        </small>
+                    </div>
+                    <div class="views light-font">
+                        <small>18万 次观看</small>
+                    </div>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+
+</section>
+
+<ng-template #loading >
+    <div fxLayout="row" fxLayoutAlign="center">
+        <mat-spinner mode="indeterminate" >
+
+        </mat-spinner>
+    </div>
+</ng-template>

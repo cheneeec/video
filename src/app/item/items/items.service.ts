@@ -14,7 +14,7 @@ export class ItemsService {
 
     findAll(category:string,page: SimplePageRequest): Observable<ResponsePage<object>> {
         return this.http.get<ResponsePage<object>>(`v1/api/video/category/${category}`, {
-            params: PageRequestUtils.convertHttpParams(page)
+            params: PageRequestUtils.convertToHttpParams(page)
         });
     }
 

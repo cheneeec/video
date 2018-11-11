@@ -41,7 +41,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
         this.itemsInitialize(category, queryParams);
 
 
-        /*this.scroll$ = this.scrollDispatcher
+        this.scroll$ = this.scrollDispatcher
             .scrolled(800)
             .pipe(
                 filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20) && !this.lastPage),
@@ -55,7 +55,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
                 pageResponse.content.forEach(item => this.items.push(item));
                 this.nextPage = ++pageResponse.number;
                 this.lastPage = pageResponse.last;
-            });*/
+            });
 
 
     }

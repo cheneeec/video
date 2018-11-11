@@ -1,41 +1,75 @@
-<mat-card appMouseEnterAddClass="['mat-elevation-z8']" title="">
+<!--<mat-card appMouseEnterAddClass="['mat-elevation-z8']" title="">
     <div>
         <div class="image-container">
-
-            <img mat-card-image="" [src]="item['image']"/>
+            <img mat-card-image src="http://placehold.it/180x236"/>
             <span class="play-info"></span>
         </div>
+
         <mat-card-title-group>
-            <mat-card-title [title]="item['title']">{{item['title']}}</mat-card-title>
-
-
-           <!-- <span>
-                <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>dialpad</mat-icon>
-                        <span>Redial</span>
-                    </button>
-                    <button mat-menu-item disabled>
-                        <mat-icon>voicemail</mat-icon>
-                        <span>Check voicemail</span>
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>notifications_off</mat-icon>
-                        <span>Disable alerts</span>
-                    </button>
-                </mat-menu>
-            </span>-->
-
+            <mat-card-title>
+                {{item['title']}}
+            </mat-card-title>
+            <span fxFlex="1 1 auto"></span>
+            <span>
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                          <mat-icon>dialpad</mat-icon>
+                          <span>Redial</span>
+                      </button>
+                      <button mat-menu-item disabled>
+                          <mat-icon>voicemail</mat-icon>
+                          <span>Check voicemail</span>
+                      </button>
+                      <button mat-menu-item>
+                          <mat-icon>notifications_off</mat-icon>
+                          <span>Disable alerts</span>
+                      </button>
+                  </mat-menu>
+              </span>
         </mat-card-title-group>
 
     </div>
 
-    <!--<mat-card-actions>
-        <button class="mdui-btn mdui-ripple" mat-button="">播放</button>
-        <button class="mdui-btn mdui-ripple" mat-button>举报</button>
-    </mat-card-actions>-->
 
-</mat-card>
+</mat-card>-->
+
+<div fxLayout="column" class="item mat-elevation-z4 hover-cursor-pointer" appMouseEnterAddClass="['mat-elevation-z8']" (click)="watch();">
+   <div class="img-container" fxLayout="row" fxLayoutAlign="end end">
+       <!--http://placehold.it/180x236-->
+       <img class="item-img" [src]="item['image']" [alt]="item['title']">
+       <span class="play-info" fxFlexOffset="-3px">{{item['playInfo']}}</span>
+   </div>
+
+    <div class="title-container">
+        <span class="title"> {{item['title']}}</span>
+        <span fxFlex="1 1 auto"></span>
+        <span class="menu-button">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                          <mat-icon>dialpad</mat-icon>
+                          <span>Redial</span>
+                      </button>
+                      <button mat-menu-item disabled>
+                          <mat-icon>voicemail</mat-icon>
+                          <span>Check voicemail</span>
+                      </button>
+                      <button mat-menu-item>
+                          <mat-icon>notifications_off</mat-icon>
+                          <span>Disable alerts</span>
+                      </button>
+                  </mat-menu>
+              </span>
+    </div>
+
+    <div class="item-bottom light-font">
+        <span>
+             {{item['videoInfo']}}
+        </span>
+    </div>
+</div>

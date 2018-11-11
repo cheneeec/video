@@ -3,12 +3,16 @@
     <app-item *ngFor="let item of items" fxFlexAlign="center" [item]="item"></app-item>
 </div>
 
-<div align="center" *ngIf="lastPage" class="no-more-tip">
-    没有更多了
+<div ngSwitch="lastPage">
+    <div align="center"  *ngSwitchCase="true" class="no-more-tip">
+        没有更多了
+    </div>
+    <div class="spinner" *ngSwitchDefault="" align="center">
+        <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
 </div>
 
-<div class="spinner" *ngIf="!lastPage" align="center">
-    <mat-spinner mode="indeterminate"></mat-spinner>
-</div>
+
+
 
 

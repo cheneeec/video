@@ -3,6 +3,8 @@
 @import "fonts";
 @import "~videogular2/fonts/videogular.css";
 
+$bgc-active: #FAFAFA;
+
 html, body {
   height: 100%;
 }
@@ -13,5 +15,38 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.float-right {
+  float: right !important;
+}
 
+.float-left {
+  float: left !important;
+}
 
+.light-font {
+  color: hsl(0, 0%, 53.3%);
+  font-weight: 500;
+  letter-spacing: .007px;
+  text-transform: uppercase;
+}
+
+.hover-cursor-pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.hover-active:hover {
+  background-color: $bgc-active;
+}
+
+.item-active {
+  background-color: darken($bgc-active,10%) ;
+}
+
+.play-info {
+  background-color: lighten(black, 20%);
+  color: $bgc-active;
+  font-size: 12px;
+  padding: 1.6px;
+}

@@ -7,12 +7,20 @@ export declare interface SimplePageRequest {
 
 export abstract class PageRequestUtils {
 
-    static convertHttpParams(page: SimplePageRequest): HttpParams {
+    static convertToHttpParams(page: SimplePageRequest): HttpParams {
+        return new HttpParams({
+            fromObject: PageRequestUtils.convertToObject(page)
+        })
+    }
+
+    static convertToObject(page: SimplePageRequest): { page?: string, size?: string } {
+        if (!page) {
+            return {};
+        }
+
         let params = {};
         params['page'] = (page.page || 0) + '';
         params['size'] = (page.size || 16) + '';
-        return new HttpParams({
-            fromObject: params
-        })
+        return params;
     }
 }

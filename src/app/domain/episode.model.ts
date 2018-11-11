@@ -6,7 +6,7 @@ export interface Episode {
     //图片 如：http://pic3.qiyipic.com/image/20150803/a9/1b/v_109343453_m_601.jpg
     image: string;
     //播放地址 如：http://www.iqiyi.com/v_19rrok9n74.html
-    playUrl: string;
+    playValue: string;
     //短的剧集描述
     shortDescription: string;
     //集数
