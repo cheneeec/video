@@ -8,8 +8,8 @@
 
     <mat-sidenav-container>
 
-        <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-                     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
+        <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async)||(sidenavOverMode$) ? 'over' : 'side'" [opened]="(!sidenavClose$|async)&&(!isHandset$ | async)">
+
             <app-sidebar></app-sidebar>
         </mat-sidenav>
 

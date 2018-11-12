@@ -25,7 +25,7 @@ export class PlayerComponent implements OnInit {
     }
 
     @Input('currentEpisode')
-    set _currentEpisode(currentEpisode: Episode): void {
+    set _currentEpisode(currentEpisode: Episode) {
         if (currentEpisode) {
             this.currentEpisode = currentEpisode;
             this.value$ = this.playerService.parsePlayValue(currentEpisode.playValue);

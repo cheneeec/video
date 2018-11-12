@@ -5,7 +5,11 @@ import {WatchComponent} from "./watch/watch.component";
 const routes: Routes = [
     {
         path: 'watch',
-        component: WatchComponent
+        component: WatchComponent,
+        data: {
+            sidenavOverMode: true,
+            sidenavClose: true
+        }
     }
 ];
 
