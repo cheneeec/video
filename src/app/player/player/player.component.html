@@ -22,8 +22,9 @@
         <vg-fullscreen></vg-fullscreen>
     </vg-controls>
 
-    <video [vgMedia]="master" #master [vgMaster]="true" id="masterVideo" preload="auto">
-        <source *ngIf="(value$|async) as value" src="http://dx.data.video.iqiyi.com/videos/v0/20181111/1e/d3/3410897db51e3f16de567414e526849e.ts?start=0&end=2476738&hsize=3316&tag=0&v=6814203511&contentlength=1540848&qdv=1&qd_uid=1023108576&qd_vip=0&qd_src=3_31_312&qd_tm=1541989616806&qd_ip=75ad8507&qd_p=75ad8507&qd_k=42d316bf40d892d4eab4c316933532fa&sgti=&dfp=&qd_sc=582aae823eb55039b7d73c652c15a2a8" >
+    <video [vgMedia]="master" #master [vgMaster]="true" id="masterVideo" preload="auto"  >
+
+        <source *ngIf="(values$|async)as values"  [src]="values[0]" type="video/mp4">
     </video>
 
 </vg-player>

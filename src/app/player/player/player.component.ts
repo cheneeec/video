@@ -13,7 +13,7 @@ export class PlayerComponent implements OnInit {
 
     currentEpisode: Episode;
 
-    value$: Observable<string[]>;
+    values$: Observable<string[]>;
 
     constructor(private playerService: PlayerService) {
     }
@@ -28,7 +28,7 @@ export class PlayerComponent implements OnInit {
     set _currentEpisode(currentEpisode: Episode) {
         if (currentEpisode) {
             this.currentEpisode = currentEpisode;
-            this.value$ = this.playerService.parsePlayValue(currentEpisode.playValue);
+            this.values$ = this.playerService.parsePlayValue(currentEpisode.playValue);
         }
     }
 
