@@ -11,24 +11,23 @@ import {Episode} from "../../domain/episode.model";
 export class PlayerComponent implements OnInit {
 
 
-    currentEpisode: Episode;
+    _currentVideo: object;
 
+    //当前播放的视频
     values$: Observable<string[]>;
 
-    constructor(private playerService: PlayerService) {
-    }
+    constructor(private playerService: PlayerService) { }
 
 
     ngOnInit() {
 
-
     }
 
-    @Input('currentEpisode')
-    set _currentEpisode(currentEpisode: Episode) {
-        if (currentEpisode) {
-            this.currentEpisode = currentEpisode;
-            this.values$ = this.playerService.parsePlayValue(currentEpisode.playValue);
+    @Input('currentVideo')
+    set currentVideo(currentVideo: object) {
+        if (currentVideo) {
+            this._currentVideo = currentVideo;
+            this.values$ = this.playerService.parsePlayValue(currentVideo['playValue']);
         }
     }
 

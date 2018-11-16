@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ResponsePage} from "../../domain/response-page.model";
-import {PageRequestUtils, SimplePageRequest} from "../../domain/SimplePageRequest";
+import {PageRequestUtils, SimplePageRequest} from "../../domain/simple-page.request";
 
 @Injectable({
     providedIn: 'root'

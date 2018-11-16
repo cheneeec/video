@@ -1,6 +1,6 @@
 <div fxLayout="row" class="watch-container" fxLayout.lt-md="column">
-    <app-player fxFlex="5 5 auto" [currentEpisode]="currentEpisode" [ngStyle.lt-md]="{minWidth:'100%'}"></app-player>
+    <app-player fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" [currentVideo]="currentRealPlay"></app-player>
     <div fxFlex="1 1 auto" class="gap"></div>
-    <app-player-list fxFlex="2 2 auto" ($currentEpisode)="currentEpisode=$event"></app-player-list>
-    <!--fxFlexOffset.gt-sm="5%" [ngStyle.lt-md]="{marginTop:'16px'}"-->
-</div>
+    <app-player-list fxFlex="2 2 auto" [video]="video$|async" ($playEpisode)="currentRealPlay=$event"></app-player-list>
+
+</div> <!--fxFlexOffset.gt-sm="5%" [ngStyle.lt-md]="{marginTop:'16px'}"-->

@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
     MatButtonModule,
-    MatCardModule,
+    MatCardModule, MatChipsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
@@ -34,6 +34,7 @@ import { PlayTimePipe } from './play-time.pipe';
         MatDialogModule,
         MatFormFieldModule,
         MatMenuModule,
+        MatChipsModule,
 
         MatProgressSpinnerModule,
         MatProgressBarModule,
@@ -58,6 +59,7 @@ import { PlayTimePipe } from './play-time.pipe';
         MatDialogModule,
         MatFormFieldModule,
         MatMenuModule,
+        MatChipsModule,
 
         MatProgressSpinnerModule,
         MatProgressBarModule,

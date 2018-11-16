@@ -56,8 +56,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
                 this.nextPage = ++pageResponse.number;
                 this.lastPage = pageResponse.last;
             });
-
-
     }
 
     /**

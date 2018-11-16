@@ -29,15 +29,15 @@
 
 </vg-player>
 
-<div *ngIf="currentEpisode">
+<div *ngIf="_currentVideo">
     <div class="play-title">
-        <h3>{{currentEpisode.title}}</h3>
+        <h3>{{_currentVideo['title']}}</h3>
     </div>
     <div class="play-description">
-        <strong class="light-font" *ngIf="currentEpisode.description">
+        <strong class="light-font" *ngIf="_currentVideo['description']">
             简介:
         </strong>
-        {{currentEpisode.description}}
+        {{_currentVideo['description']}}
     </div>
 </div>
 

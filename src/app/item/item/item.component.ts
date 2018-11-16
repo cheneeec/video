@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Video} from "../../domain/video.model";
 
 @Component({
     selector: 'app-item',
@@ -8,9 +8,9 @@ import {Router} from "@angular/router";
 })
 export class ItemComponent implements OnInit {
 
-    @Input() item: object;
+    @Input() item: Video;
 
-    constructor(private router: Router) {
+    constructor() {
     }
 
 
@@ -18,16 +18,4 @@ export class ItemComponent implements OnInit {
     }
 
 
-    watch(): void {
-        let url = this.item['playValue'];
-        //兼容IQIYI
-        if (this.item['albumId']) {
-            url += `?albumId=${this.item['albumId']}` ;
-        }
-        this.router.navigate(['watch'],{
-            queryParams:{
-                v:url
-            }
-        })
-    }
 }
