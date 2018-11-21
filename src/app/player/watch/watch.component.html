@@ -1,6 +1,6 @@
 <div fxLayout="row" class="watch-container" fxLayout.lt-md="column">
+    <div fxFlex="2 1 auto" class="left-gap" *ngIf="!(isHandset$|async)"></div>
     <app-player fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" [currentVideo]="currentRealPlay"></app-player>
-    <div fxFlex="1 1 auto" class="gap"></div>
-    <app-player-list fxFlex="2 2 auto" [video]="video$|async" ($playEpisode)="currentRealPlay=$event"></app-player-list>
-
-</div> <!--fxFlexOffset.gt-sm="5%" [ngStyle.lt-md]="{marginTop:'16px'}"-->
+    <div fxFlex="1 1 auto" class="center-gap"></div>
+    <app-player-list fxFlex="2 2 auto" [video]="video$|async" ($playEpisode)="currentRealPlay=$event" class="content-container-padding"></app-player-list>
+</div>

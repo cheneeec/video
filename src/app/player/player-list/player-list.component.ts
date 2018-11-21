@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PlayerListService} from "./player-list.service";
 import {catchError, flatMap, tap} from "rxjs/operators";
-import {Video} from "../../domain/video.model";
 import {of} from "rxjs";
 import {Episode} from "../../domain/episode.model";
 
@@ -12,9 +11,9 @@ import {Episode} from "../../domain/episode.model";
 })
 export class PlayerListComponent implements OnInit {
     //存放所有剧集列表
-    episodes: object[] = [];
+    episodes: Episode[] = [];
     //存放当前播放的剧集
-    currentEpisode: object;
+    currentEpisode: Episode;
 
     //当前正在播放的剧集
     @Output() $playEpisode = new EventEmitter<object>();
@@ -26,7 +25,7 @@ export class PlayerListComponent implements OnInit {
     }
 
     @Input('video')  //需要解析的视频
-    set video(currentVideo: Video) {
+    set video(currentVideo: Episode) {
         if (!currentVideo) {
             return;
         }
@@ -40,7 +39,7 @@ export class PlayerListComponent implements OnInit {
             let otherProperties = {};
             switch (currentVideo.platform) {
                 case 'IQIYI':
-                    otherProperties['albumId'] = currentVideo.albumId;
+                    otherProperties['albumId'] = currentVideo.properties['albumId'];
                     break;
                 //TODO　其他平台
 
@@ -67,7 +66,7 @@ export class PlayerListComponent implements OnInit {
     }
 
 
-    playEpisode(episode: object): void {
+    playEpisode(episode: Episode): void {
         this.currentEpisode = episode;
         this.$playEpisode.emit(this.currentEpisode);
     }

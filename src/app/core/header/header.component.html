@@ -1,45 +1,17 @@
 <header class="mat-elevation-z1">
-    <mat-toolbar>
+    <mat-toolbar class="header-bg-color" [ngClass]="{'handset-padding':isHandset$|async}" [ngStyle.sm]="{paddingTop:0}">
 
-        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="mat-elevation-z1" mat-icon-button (click)="toggle.emit();">
+            <mat-icon>menu</mat-icon>
+        </button>
 
-            <div class="menu-button ">
-                <button class="mat-elevation-z1" mat-icon-button (click)="toggle.emit();">
-                    <mat-icon>menu</mat-icon>
-                </button>
-            </div>
+        <span fxFlex="1 1 auto"></span>
 
-
-            <!--<div class="search-container mat-elevation-z1" fxHide.lt-sm [ngStyle.sm]="{width: '240px'}" [ngStyle.gt-sm]="{width: '630px'}">-->
-            <div class="search-container mat-elevation-z1" fxHide.lt-sm>
-
-                <input type="text" class="search-input" placeholder="" fxFlex="1 1 100%">
-
-                <button mat-icon-button="" matSuffix>
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
+        <app-header-handset [hidden]="!(isHandset$|async)" (onSearch)="submitSearchForm($event);"></app-header-handset>
 
 
-            <div class="user-button" fxLayout="row" fxLayoutAlign="end">
+        <app-header-default *ngIf="!(isHandset$|async)" (onSearch)="submitSearchForm($event);"></app-header-default>
 
-                <div fxHide.gt-xs>
-                    <button mat-icon-button="" title="搜索">
-                        <mat-icon>search</mat-icon>
-                    </button>
-                </div>
-
-
-                <div>
-                    <img mat-card-avatar class="user-avatar" src="http://placehold.it/45x45" alt="">
-                </div>
-
-                <button mat-icon-button="" title="退出">
-                    <mat-icon>exit_to_app</mat-icon>
-                </button>
-
-            </div>
-
-        </mat-toolbar-row>
     </mat-toolbar>
 </header>
+

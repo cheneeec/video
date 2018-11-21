@@ -1,21 +1,26 @@
-$container-padding-right-padding: 3%;
 $container-min-height: calc(100vh - 67px - 3vh);
-$gap-width:20px;
-
+$gap-width: 20px;
+$playlist-lr-padding: 3%;
 
 .watch-container {
   min-height: $container-min-height;
-  padding-right: $container-padding-right-padding;
-  padding-left: $container-padding-right-padding;
 }
 
-.gap{
+.left-gap {
+  min-height: $gap-width*3;
+  min-width: $gap-width*3;
+}
+
+.center-gap {
   min-height: $gap-width*3;
   min-width: $gap-width;
 }
 
-app-player{
+app-player {
   min-width: 63%;
   max-width: 70%;
   min-height: 60%;
 }
+
+
+

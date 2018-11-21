@@ -4,6 +4,7 @@ import {WatchService} from "./watch.service";
 import {ActivatedRoute} from "@angular/router";
 import {filter, map, switchMap, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
     selector: 'app-watch',
@@ -11,12 +12,15 @@ import {Observable} from "rxjs";
     styleUrls: ['./watch.component.scss']
 })
 export class WatchComponent implements OnInit {
+
     //获取当前需要播放的视频
     video$: Observable<Video>;
     //当前需要播放的剧集（真实播放），传给app-player
     currentRealPlay: object;
 
-    constructor(private watchService: WatchService, private activatedRoute: ActivatedRoute) {
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+
+    constructor(private watchService: WatchService, private activatedRoute: ActivatedRoute,private breakpointObserver: BreakpointObserver) {
     }
 
     ngOnInit() {
@@ -34,5 +38,6 @@ export class WatchComponent implements OnInit {
 
 
     }
+
 
 }

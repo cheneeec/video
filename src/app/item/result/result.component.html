@@ -1,0 +1,15 @@
+<section class="content-container-padding">
+  <div id="items"  fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutAlign.lt-sm="space-around start">
+
+    <app-item *ngFor="let item of items" fxFlexAlign="center" [item]="item"></app-item>
+  </div>
+
+  <div ngSwitch="lastPage">
+    <div align="center"  *ngSwitchCase="true" class="no-more-tip">
+      没有更多了
+    </div>
+    <div class="spinner" *ngSwitchDefault="" align="center">
+      <mat-spinner mode="indeterminate"></mat-spinner>
+    </div>
+  </div>
+</section>

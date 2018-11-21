@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {distinctUntilChanged, filter, map, switchMap, tap} from "rxjs/operators";
+import {distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
 import {Subscription} from "rxjs";
+import {Video} from "../../domain/video.model";
 
 @Component({
     selector: 'app-items',
@@ -13,7 +14,7 @@ import {Subscription} from "rxjs";
 export class ItemsComponent implements OnInit, OnDestroy {
 
 
-    items: object[] = [];
+    items: Video[] = [];
 
     private nextPage: number = 0;
 
@@ -29,16 +30,15 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     constructor(private itemsService: ItemsService,
                 private activatedRoute: ActivatedRoute,
-                private scrollDispatcher: ScrollDispatcher) { }
-
+                private scrollDispatcher: ScrollDispatcher) {
+    }
 
 
     ngOnInit() {
 
-        const activatedRouteSnapshot = this.activatedRoute.snapshot;
-        const category = activatedRouteSnapshot.data['category'];
-        const queryParams = activatedRouteSnapshot.queryParams;
-        this.itemsInitialize(category, queryParams);
+
+
+        this.itemsInitialize();
 
 
         this.scroll$ = this.scrollDispatcher
@@ -47,7 +47,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
                 filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20) && !this.lastPage),
                 map(() => this.nextPage),
                 distinctUntilChanged(),
-                switchMap(requestPage => this.itemsService.findAll(category, {
+                switchMap(requestPage => this.itemsService.findAll( this.activatedRoute.snapshot.data['category'], {
                     page: requestPage,
                     size: this.currentSize
                 })),
@@ -60,10 +60,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     /**
      * 初始化项目。智慧执行一次。
-     * @param category
-     * @param queryParams
      */
-    private itemsInitialize(category, queryParams): void {
+    private itemsInitialize(): void {
+        const activatedRouteSnapshot = this.activatedRoute.snapshot;
+        const category = activatedRouteSnapshot.data['category'];
+        const queryParams = activatedRouteSnapshot.queryParams;
+
         this.itemsService.findAll(category,
             {
                 page: queryParams['page'],
@@ -73,6 +75,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
             this.nextPage = ++responsePage.number;
             this.currentSize = responsePage.size;
             this.lastPage = responsePage.last;
+
         });
     }
 

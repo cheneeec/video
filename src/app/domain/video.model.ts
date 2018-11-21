@@ -12,5 +12,5 @@ export interface Video {
     parseValue: string;
     single: boolean;
 
-    albumId: string;
+    properties: {[key:string]:object};
 }

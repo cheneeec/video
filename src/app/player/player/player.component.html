@@ -1,35 +1,54 @@
-<vg-player>
+<!--<div *ngIf="values$|async as values" [ngSwitch]="isHandset$|async" [ngClass]="{'content-container-padding':!(isHandset$|async)}">
 
-    <vg-overlay-play></vg-overlay-play>
+    &lt;!&ndash;H5播放器&ndash;&gt;
+    <vg-player *ngSwitchCase="true">
+        <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls [vgHls]="values[0]" autoplay crossorigin></video>
+    </vg-player>
 
-    <!-- <vg-scrub-bar>
-         <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-     </vg-scrub-bar>-->
 
-    <vg-controls>
-        <vg-play-pause></vg-play-pause>
+    <vg-player (onPlayerReady)="playerReady($event);" *ngSwitchCase="false" class="default-player">
 
-        <vg-scrub-bar>
-            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-        </vg-scrub-bar>
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
 
-        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-controls vgAutohide="true">
+            <vg-play-pause></vg-play-pause>
 
-        <vg-mute></vg-mute>
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
 
-        <vg-fullscreen></vg-fullscreen>
-    </vg-controls>
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
 
-    <video [vgMedia]="master" #master [vgMaster]="true" id="masterVideo" preload="auto"  >
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
 
-        <source *ngIf="(values$|async)as values"  [src]="values[0]" type="video/mp4">
-    </video>
+            <vg-mute></vg-mute>
 
-</vg-player>
+            <vg-volume></vg-volume>
+            　　
+            <vg-fullscreen></vg-fullscreen>
 
-<div *ngIf="_currentVideo">
+        </vg-controls>
+
+
+        <video [vgMedia]="master" #master vgMaster="true" id="masterVideo" [vgHls]="values[0]" preload="auto" autoplay
+               crossorigin>
+        </video>
+
+    </vg-player>
+
+</div>-->
+
+<div [ngClass]="{'content-container-padding':!(isHandset$|async)}">
+    <div id="dplayer"> </div>
+
+</div>
+
+
+
+
+<div *ngIf="_currentVideo" class="content-container-padding video-description">
     <div class="play-title">
         <h3>{{_currentVideo['title']}}</h3>
     </div>

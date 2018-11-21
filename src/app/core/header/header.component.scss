@@ -1,38 +1,13 @@
-$header-bg-color: white;
+@import "../../../gloal_variable.scss";
 
-$header-primary-color: #FAFAFA;
 header {
-
+  height: $header-height;
 }
 
-mat-toolbar {
-  background-color: $header-bg-color;
+app-header-default {
+  width: 68%;
 }
 
-@mixin remove-input-style($color) {
-  background-color: $color;
-  border: 1px solid $color; /*去除阴影*/
-  &:focus {
-    outline-style: none;
-  }
-}
-
-.search-container {
-  border: 3px solid $header-primary-color;
-  width: 36%;
-}
-
-.search-input {
-  line-height: 28px;
-  @include remove-input-style($header-primary-color);
-}
-
-.user-button {
-  div, button {
-    margin-left: 18px;
-  }
-}
-
-.user-avatar {
-  border-radius: 50%;
+.handset-padding {
+  padding-top: 3%;
 }
