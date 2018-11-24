@@ -13,7 +13,6 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PlayerComponent implements OnInit, OnDestroy {
 
-
     _currentVideo: object;
 
     //当前播放的视频
@@ -35,7 +34,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.activatedRoute.queryParams
             .pipe(
-                filter(queryParams => queryParams['single'] || true),
+                filter(queryParams => !queryParams['single']),
+                tap(v=>console.log(v)),
                 switchMap(queryParams => this.playerService.parsePlayValue(queryParams['v'])),
                 map(values => {
                     return {

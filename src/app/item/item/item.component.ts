@@ -20,7 +20,7 @@ export class ItemComponent implements OnInit {
 
     watch(): void {
         let queryParams = {};
-        queryParams['v'] = this.item.playValue;
+        queryParams['playValue'] = this.item.playValue;
         queryParams['single'] = this.item.single;
         this.item.properties;
         for (let property in this.item.properties) {

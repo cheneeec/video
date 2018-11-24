@@ -1,6 +1,29 @@
 <div fxLayout="row" class="watch-container" fxLayout.lt-md="column">
+
     <div fxFlex="2 1 auto" class="left-gap" *ngIf="!(isHandset$|async)"></div>
-    <app-player fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" ></app-player>
+
+   <!--app-player-->
+    <div fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" class="player">
+        <div [ngClass]="{'content-container-padding':!(isHandset$|async)}" >
+            <div id="dplayer"> </div>
+        </div>
+
+        <div *ngIf="currentVideo" class="content-container-padding video-description">
+            <div class="play-title">
+                <h3>{{currentVideo['title']}}</h3>
+            </div>
+            <div class="play-description">
+                <strong class="light-font" *ngIf="currentVideo['description']">
+                    简介:
+                </strong>
+                {{currentVideo['description']}}
+            </div>
+        </div>
+
+    </div>
+    <!--//app-player-->
+
     <div fxFlex="1 1 auto" class="center-gap"></div>
-    <app-player-list fxFlex="2 2 auto" class="content-container-padding"></app-player-list><!-- [video]="video$|async" ($playEpisode)="currentRealPlay=$event"-->
+
+    <app-player-list fxFlex="2 2 auto" class="content-container-padding" ($playEpisode)="onPlay($event);"></app-player-list><!-- [video]="video$|async" ($playEpisode)="currentVideo=$event"-->
 </div>

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {EMPTY, Observable} from "rxjs";
 import {Video} from "../../domain/video.model";
 
 @Injectable({
@@ -17,4 +17,14 @@ export class WatchService {
 
     }
 
+    parsePlayValue(value: string): Observable<string[]> {
+        if(!value){
+            return EMPTY;
+        }
+        return this.http.post<string[]>('/v1/api/video/value', null,{
+            params:{playValue:value}
+        });
+        // return of(['../../assets/03.mp4']);
+
+    }
 }

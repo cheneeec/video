@@ -1,8 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PlayerListService} from "./player-list.service";
-import {catchError, filter, flatMap, tap} from "rxjs/operators";
-import {Video} from "../../domain/video.model";
-import {of} from "rxjs";
+import {filter, flatMap, map, switchMap, tap} from "rxjs/operators";
 import {Episode} from "../../domain/episode.model";
 import {ActivatedRoute} from "@angular/router";
 
@@ -23,9 +21,11 @@ export class PlayerListComponent implements OnInit {
 
     message: string;
 
+    private static readonly _excludeProperties = ['page', 'size', 'single', 'playValue'];
+
 
     constructor(private playerListService: PlayerListService,
-                private activatedRoute:ActivatedRoute) {
+                private activatedRoute: ActivatedRoute) {
     }
 
     /*@Input('video')  //需要解析的视频
@@ -68,8 +68,12 @@ export class PlayerListComponent implements OnInit {
 
         this.activatedRoute.queryParams
             .pipe(
-                filter(queryParams=>queryParams['single']||true)
-            )
+                filter(queryParams => queryParams['single']),
+                map(PlayerListComponent.mapToPlayListArguments),
+                switchMap(args => this.playerListService.findEpisodes(args['url'], args['otherProperties'], args['page'])),
+                tap(episodes=>this.playEpisode(episodes[0])),//默认播放第一个
+                flatMap(e => e)
+            ).subscribe(episode => this.episodes.push(episode))
 
     }
 
@@ -77,6 +81,26 @@ export class PlayerListComponent implements OnInit {
     playEpisode(episode: Episode): void {
         this.currentEpisode = episode;
         this.$playEpisode.emit(this.currentEpisode);
+    }
+
+    /**
+     * 将查询参数转化为服务请求的参数。
+     * @param queryParams
+     */
+    private static mapToPlayListArguments(queryParams) {
+        const page = {page: queryParams['page'], size: queryParams['size']};
+        //设置扩展属性
+        const properties = {};
+        for (let k in queryParams) {
+            if (!PlayerListComponent._excludeProperties.includes(k)) {
+                properties[k] = queryParams[k]
+            }
+        }
+        return {
+            page: page,
+            otherProperties: properties,
+            url: queryParams['playValue']
+        }
     }
 
 }

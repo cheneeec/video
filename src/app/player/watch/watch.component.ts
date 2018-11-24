@@ -1,41 +1,76 @@
-import {Component, OnInit} from '@angular/core';
-import {Video} from "../../domain/video.model";
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WatchService} from "./watch.service";
 import {ActivatedRoute} from "@angular/router";
 import {filter, map, switchMap, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import DPlayer from "dplayer";
+import {Episode} from "../../domain/episode.model";
 
 @Component({
     selector: 'app-watch',
     templateUrl: './watch.component.html',
     styleUrls: ['./watch.component.scss']
 })
-export class WatchComponent implements OnInit {
+export class WatchComponent implements OnInit, OnDestroy {
 
-    //获取当前需要播放的视频
-    video$: Observable<Video>;
+
     //当前需要播放的剧集（真实播放），传给app-player
-    currentRealPlay: object;
+    currentVideo: object;
 
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
-    constructor(private watchService: WatchService, private activatedRoute: ActivatedRoute,private breakpointObserver: BreakpointObserver) {
+    //播放器实例
+    private dplayer: DPlayer;
+
+    constructor(private watchService: WatchService,
+                private activatedRoute: ActivatedRoute,
+                private breakpointObserver: BreakpointObserver) {
     }
 
-    ngOnInit() {
-        //当前播放的视频
-      /*  this.video$ = this.activatedRoute.queryParams.pipe(
-            map(params => params['id']),
-            filter(id => !!id),
-            switchMap(id => this.watchService.get(id)),
-            tap(video=>{
-                if(video.single){
-                    this.currentRealPlay=video;
-                }
-            })
-        );*/
 
+    ngOnInit() {
+        this.activatedRoute.queryParams
+            .pipe(
+                filter(queryParams => !queryParams['single']),
+                switchMap(queryParams => this.watchService.parsePlayValue(queryParams['playValue']))
+            ).subscribe(values => this.dplayer = WatchComponent.createDPlayer(values))
+
+    }
+
+    ngOnDestroy(): void {
+        if (this.dplayer)
+            this.dplayer.destroy();
+    }
+
+    onPlay(episode: Episode): void {
+
+        this.currentVideo = episode;
+
+        this.watchService.parsePlayValue(episode.playValue)
+            .subscribe(values => {
+                if (!this.dplayer) {
+                    this.dplayer = WatchComponent.createDPlayer(values)
+                } else {
+                    this.dplayer.switchVideo({url: values[0]}, null);
+                    this.dplayer.play();
+                }
+
+            })
+
+    }
+
+
+    private static createDPlayer(values: string[]) {
+        return new DPlayer({
+            container: document.getElementById('dplayer'),
+            screenshot: true,
+            autoplay: true,
+            video: {
+                url: values[0]
+            }
+
+        });
     }
 
 

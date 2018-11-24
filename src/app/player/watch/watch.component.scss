@@ -2,6 +2,8 @@ $container-min-height: calc(100vh - 67px - 3vh);
 $gap-width: 20px;
 $playlist-lr-padding: 3%;
 
+$player-height: 65vh;
+
 .watch-container {
   min-height: $container-min-height;
 }
@@ -16,11 +18,22 @@ $playlist-lr-padding: 3%;
   min-width: $gap-width;
 }
 
-app-player {
+
+
+
+.player {
   min-width: 63%;
   max-width: 70%;
   min-height: 60%;
 }
 
+.player-padding {
+  padding-left: 10vh;
+}
+
+.video-description {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 
