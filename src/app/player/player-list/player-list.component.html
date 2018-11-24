@@ -9,7 +9,7 @@
      </div>
 
     <ul role="list" class="play-list" #playList>
-        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode==currentEpisode,' hover-active':episode!=currentEpisode}">
+        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode.playValue==currentEpisode.playValue,' hover-active':episode.playValue!=currentEpisode.playValue}">
             <div fxLayout="row" (click)="playEpisode(episode);">
                 <div class="video-img">
                     <!--http://placehold.it/168x100-->
@@ -25,7 +25,7 @@
                         </small>
                     </div>
                     <div class="views light-font">
-                        <small>18万 次观看</small>
+                        <!--<small>18万 次观看</small>-->
                     </div>
                 </div>
 

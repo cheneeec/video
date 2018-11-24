@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {distinctUntilChanged, filter, map, switchMap, tap} from "rxjs/operators";
+import {distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
 import {Subscription} from "rxjs";
+import {Video} from "../../domain/video.model";
 
 @Component({
     selector: 'app-items',
@@ -13,7 +14,7 @@ import {Subscription} from "rxjs";
 export class ItemsComponent implements OnInit, OnDestroy {
 
 
-    items: object[] = [];
+    items: Video[] = [];
 
     private nextPage: number = 0;
 
@@ -64,6 +65,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
      * @param queryParams
      */
     private itemsInitialize(category, queryParams): void {
+
         this.itemsService.findAll(category,
             {
                 page: queryParams['page'],

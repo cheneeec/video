@@ -3,13 +3,18 @@ import {SidebarComponent} from './sidebar/sidebar.component';
 import {HeaderComponent} from './header/header.component';
 import {ShareModule} from "../share/share.module";
 import {AppRoutingModule} from "./app-routing.module";
+import { HeaderDefaultComponent } from './header/header-default/header-default.component';
+import { HeaderHandsetComponent } from './header/header-handset/header-handset.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         ShareModule,
-        AppRoutingModule
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
-    declarations: [SidebarComponent, HeaderComponent],
+    declarations: [SidebarComponent, HeaderComponent, HeaderDefaultComponent, HeaderHandsetComponent],
     exports: [HeaderComponent, SidebarComponent, AppRoutingModule] //必须导出供外部使用
 })
 export class CoreModule {

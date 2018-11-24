@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PlayerListService} from "./player-list.service";
-import {catchError, flatMap, tap} from "rxjs/operators";
+import {catchError, filter, flatMap, tap} from "rxjs/operators";
 import {Video} from "../../domain/video.model";
 import {of} from "rxjs";
 import {Episode} from "../../domain/episode.model";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-player-list',
@@ -11,10 +12,11 @@ import {Episode} from "../../domain/episode.model";
     styleUrls: ['./player-list.component.scss']
 })
 export class PlayerListComponent implements OnInit {
+
     //存放所有剧集列表
-    episodes: object[] = [];
+    episodes: Episode[] = [];
     //存放当前播放的剧集
-    currentEpisode: object;
+    currentEpisode: Episode;
 
     //当前正在播放的剧集
     @Output() $playEpisode = new EventEmitter<object>();
@@ -22,11 +24,12 @@ export class PlayerListComponent implements OnInit {
     message: string;
 
 
-    constructor(private playerListService: PlayerListService) {
+    constructor(private playerListService: PlayerListService,
+                private activatedRoute:ActivatedRoute) {
     }
 
-    @Input('video')  //需要解析的视频
-    set video(currentVideo: Video) {
+    /*@Input('video')  //需要解析的视频
+    set video(currentVideo: Episode) {
         if (!currentVideo) {
             return;
         }
@@ -40,7 +43,7 @@ export class PlayerListComponent implements OnInit {
             let otherProperties = {};
             switch (currentVideo.platform) {
                 case 'IQIYI':
-                    otherProperties['albumId'] = currentVideo.albumId;
+                    otherProperties['albumId'] = currentVideo.properties['albumId'];
                     break;
                 //TODO　其他平台
 
@@ -58,16 +61,20 @@ export class PlayerListComponent implements OnInit {
                     flatMap(v=>v)
                 ).subscribe(e => this.episodes.push(e));
         }
-    }
+    }*/
 
 
     ngOnInit() {
 
+        this.activatedRoute.queryParams
+            .pipe(
+                filter(queryParams=>queryParams['single']||true)
+            )
 
     }
 
 
-    playEpisode(episode: object): void {
+    playEpisode(episode: Episode): void {
         this.currentEpisode = episode;
         this.$playEpisode.emit(this.currentEpisode);
     }

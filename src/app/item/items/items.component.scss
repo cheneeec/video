@@ -1,4 +1,7 @@
+@import "../../../gloal_variable.scss";
 $spinner-height: 120px;
+
+
 
 .no-more-tip {
   margin-bottom: 5%;
@@ -6,5 +9,6 @@ $spinner-height: 120px;
 
 .spinner {
   height: $spinner-height;
+  margin-top: 2%;
 }
 

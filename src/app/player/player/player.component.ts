@@ -1,14 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {PlayerService} from "./player.service";
 import {Observable} from "rxjs";
-import {Episode} from "../../domain/episode.model";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {filter, map, switchMap, tap} from "rxjs/operators";
+import DPlayer, {DPlayerOptions, DPlayerVideo} from "dplayer";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-player',
     templateUrl: './player.component.html',
     styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnDestroy {
 
 
     _currentVideo: object;
@@ -16,19 +19,70 @@ export class PlayerComponent implements OnInit {
     //当前播放的视频
     values$: Observable<string[]>;
 
-    constructor(private playerService: PlayerService) { }
+    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+        .pipe(map(result => result.matches));
+
+    private dplayer: DPlayer;
 
 
-    ngOnInit() {
+    constructor(private playerService: PlayerService,
+                private breakpointObserver: BreakpointObserver,
+                private activatedRoute: ActivatedRoute) {
 
     }
 
-    @Input('currentVideo')
+
+    ngOnInit() {
+        this.activatedRoute.queryParams
+            .pipe(
+                filter(queryParams => queryParams['single'] || true),
+                switchMap(queryParams => this.playerService.parsePlayValue(queryParams['v'])),
+                map(values => {
+                    return {
+                        container: document.getElementById('dplayer'),
+                        screenshot: true,
+                        autoplay: true,
+                        video: {
+                            url: values[0]
+                        }
+                    }
+                })
+            ).subscribe(o => this.dplayer = new DPlayer(o))
+
+
+    }
+
+    /*@Input('currentVideo')
     set currentVideo(currentVideo: object) {
         if (currentVideo) {
             this._currentVideo = currentVideo;
             this.values$ = this.playerService.parsePlayValue(currentVideo['playValue']);
+
+            this.values$
+                .pipe(
+                    map(values => {
+                        return {
+                            container: document.getElementById('dplayer'),
+                            screenshot: true,
+                            autoplay: true,
+                            video: {
+                                url: values[0]
+                            }
+                        }
+                    })
+                )
+                .subscribe(o => this.dplayer = new DPlayer(o))
+
+
         }
+    }*/
+
+    ngOnDestroy(): void {
+        if (this.dplayer) {
+            this.dplayer.destroy();
+        }
+
     }
+
 
 }

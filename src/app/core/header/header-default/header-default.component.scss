@@ -1,0 +1,29 @@
+$header-primary-color: #FAFAFA;
+
+@mixin remove-input-style($color) {
+  background-color: $color;
+  border: 1px solid $color; /*去除阴影*/
+  &:focus {
+    outline-style: none;
+  }
+}
+
+
+.search-container {
+  border: 3px solid $header-primary-color;
+  width: 56%;
+}
+
+.search-input {
+  line-height: 28px;
+  @include remove-input-style($header-primary-color);
+}
+
+.header-icon{
+  margin-left: 18px;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  margin-top: 3px;
+}

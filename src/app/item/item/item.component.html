@@ -1,45 +1,9 @@
-<!--<mat-card appMouseEnterAddClass="['mat-elevation-z8']" title="">
-    <div>
-        <div class="image-container">
-            <img mat-card-image src="http://placehold.it/180x236"/>
-            <span class="play-info"></span>
-        </div>
-
-        <mat-card-title-group>
-            <mat-card-title>
-                {{item['title']}}
-            </mat-card-title>
-            <span fxFlex="1 1 auto"></span>
-            <span>
-                  <button mat-icon-button [matMenuTriggerFor]="menu">
-                      <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                          <mat-icon>dialpad</mat-icon>
-                          <span>Redial</span>
-                      </button>
-                      <button mat-menu-item disabled>
-                          <mat-icon>voicemail</mat-icon>
-                          <span>Check voicemail</span>
-                      </button>
-                      <button mat-menu-item>
-                          <mat-icon>notifications_off</mat-icon>
-                          <span>Disable alerts</span>
-                      </button>
-                  </mat-menu>
-              </span>
-        </mat-card-title-group>
-
-    </div>
-
-
-</mat-card>-->
-
-<div fxLayout="column" class="item mat-elevation-z4 hover-cursor-pointer" appMouseEnterAddClass="['mat-elevation-z8']" [routerLink]="['/watch',item.id]">
+<div fxLayout="column" class="item mat-elevation-z4 hover-cursor-pointer" appMouseEnterAddClass="['mat-elevation-z8']" >
    <div class="img-container" fxLayout="row" fxLayoutAlign="end end">
        <!--http://placehold.it/180x236-->
-       <img class="item-img" [src]="item['image']" [alt]="item['title']">
+       <a (click)="watch();">
+           <img class="item-img" [src]="item['image']" [alt]="item['title']" >
+       </a>
        <span class="play-info" fxFlexOffset="-3px">{{item['playInfo']}}</span>
    </div>
 

@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "fonts";
 @import "~videogular2/fonts/videogular.css";
+@import "~dplayer/dist/DPlayer.min.css";
+@import "fonts";
 
 $bgc-active: #FAFAFA;
+
+$header-bg-color: white;
 
 html, body {
   height: 100%;
@@ -15,12 +18,20 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.header-bg-color {
+  background-color: $header-bg-color;
+}
+
 .float-right {
   float: right !important;
 }
 
 .float-left {
   float: left !important;
+}
+
+.full-width {
+  width: 100%;
 }
 
 .light-font {
@@ -41,7 +52,7 @@ body {
 }
 
 .item-active {
-  background-color: darken($bgc-active,10%) ;
+  background-color: darken($bgc-active, 10%);
 }
 
 .play-info {
@@ -49,4 +60,8 @@ body {
   color: $bgc-active;
   font-size: 12px;
   padding: 1.6px;
+}
+
+.content-container-padding {
+  padding: 3vh 3vh;
 }

@@ -1,0 +1,24 @@
+<!--默认显示项-->
+<form class="search-container mat-elevation-z1"  autocomplete="off" (ngSubmit)="onSearch.emit(keyword)" fxHide.lt-sm>
+    <input type="text" class="search-input" [(ngModel)]="keyword" name="keyword" fxFlex="1 1 100%" >
+
+    <button mat-icon-button matSuffix type="submit" [disabled]="!keyword">
+        <mat-icon>search</mat-icon>
+    </button>
+</form>
+
+
+<span fxFlex="1 1 auto"></span>
+
+
+<div fxLayout="row" fxLayoutAlign="end">
+    <div class="header-icon">
+        <img mat-card-avatar class="user-avatar" src="http://placehold.it/35x35" alt="">
+    </div>
+
+    <button mat-icon-button title="退出" class="header-icon">
+        <mat-icon>exit_to_app</mat-icon>
+    </button>
+</div>
+
+<!--//默认显示项-->

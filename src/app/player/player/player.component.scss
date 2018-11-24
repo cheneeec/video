@@ -1,5 +1,16 @@
+@import "../../../gloal_variable.scss";
+
 $player-height: 65vh;
 
 vg-player {
-  max-height: $player-height;
+  //max-height: $player-height;
+}
+
+.player-padding {
+  padding-left: 10vh;
+}
+
+.video-description {
+  padding-top: 0;
+  padding-bottom: 0;
 }

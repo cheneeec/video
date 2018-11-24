@@ -11,13 +11,13 @@ export class PlayerService {
     }
 
     parsePlayValue(value: string): Observable<string[]> {
-
         if(!value){
             return EMPTY;
         }
-        /*return this.http.post<string[]>('/v1/api/video/value', null,{
+        return this.http.post<string[]>('/v1/api/video/value', null,{
             params:{playValue:value}
-        })*/
-        return of(['../../assets/03.mp4']);
+        });
+        // return of(['../../assets/03.mp4']);
+
     }
 }
