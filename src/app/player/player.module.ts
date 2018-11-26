@@ -22,7 +22,8 @@ import {VgStreamingModule} from "videogular2/streaming";
         VgBufferingModule,
         VgStreamingModule,
 
-    ]
+    ],
+    providers:[]
 })
 export class PlayerModule {
 }

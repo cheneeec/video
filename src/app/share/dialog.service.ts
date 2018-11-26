@@ -68,12 +68,12 @@ export class ConfirmComponent implements OnInit {
             <div mat-dialog-title>
                 {{data['title']}}
             </div>
-            <mat-dialog-content style="text-align:start;">
+            <mat-dialog-content  align="start">
                 {{data['content']}}
             </mat-dialog-content>
 
-            <mat-dialog-actions class="button" style="float: right;">
-                <button mat-button color="accent" mat-dialog-close="">{{data.closeButton||'关闭'}}</button>
+            <mat-dialog-actions class="button float-right" >
+                <button mat-button color="accent" mat-dialog-close>{{data.closeButton||'关闭'}}</button>
             </mat-dialog-actions>
         </div>
     `

@@ -1,7 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {ItemsComponent} from "./items/items.component";
-import {ResultComponent} from "./result/result.component";
 
 const routes: Routes = [
     {
@@ -20,7 +19,7 @@ const routes: Routes = [
     },
     {
         path: 'results',
-        component: ResultComponent
+        component: ItemsComponent
     }
 ];
 

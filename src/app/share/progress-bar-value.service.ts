@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {interval, Observable, Subject} from "rxjs";
-import {filter, map, take, takeUntil} from "rxjs/operators";
+import { Observable, Subject, timer} from "rxjs";
+import {filter, map, scan, take, takeUntil, takeWhile} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -15,13 +15,15 @@ export class ProgressBarValueService implements OnDestroy {
 
 
     loading(): void {
-        interval(100).pipe(
-            take(10),
-            map(v => 10 * v),
-            takeUntil(this._progressBarValue$.pipe(
-                filter(v => v == null)
-            ))
-        ).subscribe(v => this._progressBarValueSubject.next(v))
+        timer(0, 120)
+            .pipe(
+                scan((p, c) => c + 5),
+                takeWhile(v => v < 98),
+                takeUntil(this._progressBarValue$.pipe(
+                    filter(v => v == null)
+                ))
+            ).subscribe(v => this._progressBarValueSubject.next(v));
+
     }
 
     loadCompleted(): void {

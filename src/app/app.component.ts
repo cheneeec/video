@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {map, tap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {MatIconRegistry} from "@angular/material";
 import {ProgressBarValueService} from "./share/progress-bar-value.service";
 import {slideInAnimation} from "./animations";
-import {RouterOutlet} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -17,8 +16,6 @@ export class AppComponent implements OnInit {
 
     progressBarValue$: Observable<number> = this.progressBarService.progressBarValue;
     isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
-    // sidenavOverMode$: Observable<boolean> = this.activatedRoute.data.pipe(map(data => data['sidenavOverMode']));
-    // sidenavClose$: Observable<boolean> = this.activatedRoute.data.pipe(map(data => data['sidenavClose']));
 
     constructor(private breakpointObserver: BreakpointObserver,
                 private matIconRegistry: MatIconRegistry,
@@ -32,11 +29,8 @@ export class AppComponent implements OnInit {
 
     }
 
-    getAnimationData(outlet: RouterOutlet) {
-        // return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-        console.log()
+
+    getAnimationData(routerOutlet) {
         return true;
     }
-
-
 }

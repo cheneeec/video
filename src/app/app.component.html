@@ -8,12 +8,13 @@
 
     <mat-sidenav-container>
 
-        <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(!isHandset$|async)">
+        <mat-sidenav #sidebar [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$|async)||( routerOutlet.activatedRouteData['sidenavOverMode']) ? 'over' : 'side'" [opened]="!(isHandset$|async)&&!(routerOutlet.activatedRouteData['sidenavClose'])">
             <app-sidebar></app-sidebar>
         </mat-sidenav>
 
-        <mat-sidenav-content class="mat-elevation-z1" ><!--[ngStyle]="{padding:(isHandset$ | async)?'3vh 0':'0'}"-->
-            <router-outlet></router-outlet>
+        <mat-sidenav-content class="mat-elevation-z1" [@routeAnimation]="getAnimationData(routerOutlet)">
+            <router-outlet #routerOutlet="outlet"></router-outlet>
+
         </mat-sidenav-content>
 
     </mat-sidenav-container>

@@ -13,9 +13,8 @@ export class HeaderComponent implements OnInit {
 
     @Output() toggle = new EventEmitter<void>();
 
-    isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
+   readonly isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
-    handsetSearchVisiable: boolean;
 
     constructor(private breakpointObserver: BreakpointObserver,
                 private router: Router) {
@@ -26,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
 
     submitSearchForm($event): void {
-        this.router.navigate(['results'], {
+        this.router.navigate(['/results'], {
             queryParams: {
                 q: $event
             }

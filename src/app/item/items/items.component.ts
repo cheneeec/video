@@ -1,85 +1,101 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ItemsService} from "./items.service";
 import {ActivatedRoute} from "@angular/router";
-import {distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
-import {Subscription} from "rxjs";
+import {BehaviorSubject, combineLatest, Observable, of, Subscription} from "rxjs";
 import {Video} from "../../domain/video.model";
+import {DataListService, dataListServiceFactory} from "./data-list.service";
+import {HttpClient} from "@angular/common/http";
+import {catchError, filter, map, pluck, retry, scan, switchMap, takeWhile, tap} from "rxjs/operators";
+import {DialogService} from "../../share/dialog.service";
 
 @Component({
     selector: 'app-items',
     templateUrl: './items.component.html',
-    styleUrls: ['./items.component.scss']
+    styleUrls: ['./items.component.scss'],
+    providers: [
+        {
+            provide: DataListService,
+            useFactory: dataListServiceFactory,
+            deps: [HttpClient, ActivatedRoute]
+        }
+    ]
 })
 export class ItemsComponent implements OnInit, OnDestroy {
 
 
-    items: Video[] = [];
+    lastPage: boolean = false;
 
-    private nextPage: number = 0;
+    private  scroll$: Subscription;
 
-    private currentSize = 16;
+    private readonly viewContainer = document.getElementsByClassName('view-container').item(0);
 
-    lastPage: boolean;
+    //=============
+    items$: Observable<Video[]>;
 
-    private scroll$: Subscription;
+    private readonly currentPageSubject = new BehaviorSubject<number>(0);
+
+    private readonly currentPage$ = this.currentPageSubject.asObservable();
+
+    private pageSize: number = 16;
 
 
-    viewContainer = document.getElementsByClassName('view-container').item(0);
-
-
-    constructor(private itemsService: ItemsService,
+    constructor(private dataListService: DataListService,
                 private activatedRoute: ActivatedRoute,
-                private scrollDispatcher: ScrollDispatcher) { }
-
+                private scrollDispatcher: ScrollDispatcher,
+                private dialogService: DialogService) {
+    }
 
 
     ngOnInit() {
 
-        const activatedRouteSnapshot = this.activatedRoute.snapshot;
-        const category = activatedRouteSnapshot.data['category'];
-        const queryParams = activatedRouteSnapshot.queryParams;
-        this.itemsInitialize(category, queryParams);
+        this.initializeDataLst();
 
 
+        this.initializeScroll();
+
+
+    }
+
+
+    private initializeDataLst() {
+        this.items$ = combineLatest(
+            this.activatedRoute.queryParams,
+            this.currentPage$
+        ).pipe(
+            switchMap( //转化
+                params => this.dataListService.findAll(params[0], {
+                    page: params[1],
+                    size: this.pageSize
+                })
+            ),
+            takeWhile(() => !this.lastPage), //当最后一页时，取消发出的值。
+            retry(3),//重试三次
+            catchError(error => {
+                this.dialogService.alert({
+                    content: '服务器出错!!!'
+                });
+                return of();
+            }),
+            tap(pageResponse =>  this.lastPage = pageResponse && pageResponse['last'] ),//lastPage赋值
+            pluck('content'),　//取content
+            scan((previousContent, currentContent) => previousContent.concat(currentContent), [])//讲结果进行合并
+
+        );
+    }
+
+    private initializeScroll() {
         this.scroll$ = this.scrollDispatcher
             .scrolled(800)
             .pipe(
-                filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 20) && !this.lastPage),
-                map(() => this.nextPage),
-                distinctUntilChanged(),
-                switchMap(requestPage => this.itemsService.findAll(category, {
-                    page: requestPage,
-                    size: this.currentSize
-                })),
-            ).subscribe(pageResponse => {
-                pageResponse.content.forEach(item => this.items.push(item));
-                this.nextPage = ++pageResponse.number;
-                this.lastPage = pageResponse.last;
-            });
-    }
-
-    /**
-     * 初始化项目。智慧执行一次。
-     * @param category
-     * @param queryParams
-     */
-    private itemsInitialize(category, queryParams): void {
-
-        this.itemsService.findAll(category,
-            {
-                page: queryParams['page'],
-                size: queryParams['size']
-            }).subscribe(responsePage => {
-            this.items = responsePage.content;
-            this.nextPage = ++responsePage.number;
-            this.currentSize = responsePage.size;
-            this.lastPage = responsePage.last;
-        });
+                filter(() => (document.documentElement.clientHeight + document.documentElement.scrollTop > this.viewContainer.scrollHeight - 90) && !this.lastPage),
+                map(() => this.currentPageSubject.getValue())
+            ).subscribe(page => this.currentPageSubject.next(page + 1));
     }
 
     ngOnDestroy(): void {
-        this.scroll$.unsubscribe();
+        if (this.scroll$) {
+            this.scroll$.unsubscribe();
+        }
     }
 
 

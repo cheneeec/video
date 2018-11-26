@@ -7,4 +7,5 @@ export interface ResponsePage<T> {
     size: number;
     totalElements: number;
     totalPages: number;
+    empty: boolean;
 }

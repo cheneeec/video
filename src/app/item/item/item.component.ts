@@ -19,16 +19,20 @@ export class ItemComponent implements OnInit {
     }
 
     watch(): void {
-        let queryParams = {};
-        queryParams['playValue'] = this.item.playValue;
-        queryParams['single'] = this.item.single;
-        this.item.properties;
+        const queryParams = {};
+        if (this.item.single) {
+            queryParams['v'] = this.item.playValue;
+        } else
+            queryParams['playList'] = this.item.playValue;
+
         for (let property in this.item.properties) {
             queryParams[property] = this.item.properties[property]
         }
+
         this.router.navigate(['/watch'], {
             queryParams: queryParams
         })
+
     }
 
 }

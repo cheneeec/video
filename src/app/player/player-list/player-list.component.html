@@ -1,4 +1,4 @@
-<section class="play-list-container" role="main" *ngIf="episodes.length; else loading">
+<section class="play-list-container" role="main" *ngIf="episodes$|async as episodes; else loading">
 
      <div class="next-play-list">
          <span>接下来播放</span>
@@ -8,8 +8,8 @@
          </mat-slide-toggle>
      </div>
 
-    <ul role="list" class="play-list" #playList>
-        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode.playValue==currentEpisode.playValue,' hover-active':episode.playValue!=currentEpisode.playValue}"><!---->
+    <ul role="list" id="play-list" class="play-list" #playList>
+        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode.playValue==(playValue$|async),' hover-active':episode.playValue!=(playValue$|async)}"><!---->
             <div fxLayout="row" (click)="playEpisode(episode);">
                 <div class="video-img">
                     <!--http://placehold.it/168x100-->
