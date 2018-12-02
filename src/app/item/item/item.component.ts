@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Video} from "../../domain/video.model";
+import {Video} from "../../model/video.model";
 import {Router} from "@angular/router";
 
 @Component({
@@ -21,13 +21,12 @@ export class ItemComponent implements OnInit {
     watch(): void {
         const queryParams = {};
         if (this.item.single) {
-            queryParams['v'] = this.item.playValue;
+            queryParams['v'] = this.item.rawValue;
         } else
-            queryParams['playList'] = this.item.playValue;
+            queryParams['playList'] = this.item.rawValue;
 
-        for (let property in this.item.properties) {
-            queryParams[property] = this.item.properties[property]
-        }
+
+        Object.assign(queryParams,this.item.properties);
 
         this.router.navigate(['/watch'], {
             queryParams: queryParams

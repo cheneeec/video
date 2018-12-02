@@ -2,6 +2,8 @@
 
 header {
   height: $header-height;
+
+
 }
 
 app-header-default {
@@ -10,4 +12,8 @@ app-header-default {
 
 .handset-padding {
   padding-top: 2%;
+}
+
+.search-input {
+  font-size: 29px;
 }

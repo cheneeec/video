@@ -12,19 +12,12 @@
             <app-sidebar></app-sidebar>
         </mat-sidenav>
 
-        <mat-sidenav-content class="mat-elevation-z1" [@routeAnimation]="getAnimationData(routerOutlet)">
+        <mat-sidenav-content [@routeAnimation]="getAnimationData(routerOutlet)">
             <router-outlet #routerOutlet="outlet"></router-outlet>
 
         </mat-sidenav-content>
 
     </mat-sidenav-container>
 
-
-
 </div>
-
-
-
-
-
 

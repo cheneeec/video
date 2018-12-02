@@ -5,18 +5,22 @@
    <!--app-player-->
     <div fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" class="player">
         <div [ngClass]="{'content-container-padding':!(isHandset$|async)}" >
-            <div id="dplayer"> </div>
+            <div id="dplayer"></div>
+
         </div>
 
-        <div *ngIf="currentVideo" class="content-container-padding video-description">
-            <div class="play-title">
-                <h3>{{currentVideo['title']}}</h3>
+        <div *ngIf="currentEpisode" class="content-container-padding video-description">
+
+            <div class="play-title" fxLayout="row" fxLayoutAlign="start baseline">
+                <h3>{{currentEpisode.title}}</h3>
+                <div fxFlexOffset="3%">{{currentEpisode.shortDescription}}</div>
             </div>
+
             <div class="play-description">
-                <strong class="light-font" *ngIf="currentVideo['description']">
+                <strong class="light-font" *ngIf="currentEpisode.description">
                     简介:
                 </strong>
-                {{currentVideo['description']}}
+                {{currentEpisode.description}}
             </div>
         </div>
 
@@ -25,5 +29,48 @@
 
     <div fxFlex="1 1 auto" class="center-gap"></div>
 
-    <app-player-list fxFlex="2 2 auto" class="content-container-padding" ($playEpisode)="onPlay($event);"></app-player-list><!-- [video]="video$|async" ($playEpisode)="currentVideo=$event"-->
+    <app-player-list fxFlex="2 2 auto" class="content-container-padding" (onEpisode)="currentEpisode=$event"></app-player-list>
 </div>
+
+<!--
+<div *ngIf="values$|async as values" [ngSwitch]="isHandset$|async" [ngClass]="{'content-container-padding':!(isHandset$|async)}">
+
+    &lt;!&ndash;H5播放器&ndash;&gt;
+    <vg-player *ngSwitchCase="true">
+        <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls [vgHls]="values[0]" autoplay crossorigin></video>
+    </vg-player>
+
+
+    <vg-player (onPlayerReady)="playerReady($event);" *ngSwitchCase="false" class="default-player">
+
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
+
+        <vg-controls vgAutohide="true">
+            <vg-play-pause></vg-play-pause>
+
+            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+            <vg-scrub-bar>
+                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+            </vg-scrub-bar>
+
+            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+            <vg-mute></vg-mute>
+
+            <vg-volume></vg-volume>
+            　　
+            <vg-fullscreen></vg-fullscreen>
+
+        </vg-controls>
+
+
+        <video [vgMedia]="master" #master vgMaster="true" id="masterVideo" [vgHls]="values[0]" preload="auto" autoplay
+               crossorigin>
+        </video>
+
+    </vg-player>
+
+</div>-->

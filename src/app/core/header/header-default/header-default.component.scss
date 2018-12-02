@@ -16,10 +16,11 @@ $header-primary-color: #FAFAFA;
 
 .search-input {
   line-height: 28px;
+  font-size: 19px;
   @include remove-input-style($header-primary-color);
 }
 
-.header-icon{
+.header-icon {
   margin-left: 18px;
 }
 

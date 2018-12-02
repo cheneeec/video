@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Episode} from "../../domain/episode.model";
-import {PageRequestUtils, SimplePageRequest} from "../../domain/simple-page.request";
+import {Episode} from "../../model/episode.model";
+import {PageRequestUtils, SimplePageRequest} from "../../model/simple-page.request";
 
 @Injectable({
     providedIn: 'root'

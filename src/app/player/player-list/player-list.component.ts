@@ -1,11 +1,11 @@
 import {
-    Component,
-    OnInit,
+    Component, EventEmitter,
+    OnInit, Output,
 
 } from '@angular/core';
 import {PlayerListService} from "./player-list.service";
-import {distinctUntilKeyChanged, map, pluck, switchMap, tap} from "rxjs/operators";
-import {Episode} from "../../domain/episode.model";
+import {distinctUntilKeyChanged, filter, map, pluck, switchMap, tap} from "rxjs/operators";
+import {Episode} from "../../model/episode.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -21,10 +21,12 @@ export class PlayerListComponent implements OnInit {
 
     message: string;
 
-    private static readonly _excludeProperties = ['page', 'size', 'single', 'playValue'];
+    private static readonly _excludeProperties = ['page', 'size', 'single', 'rawValue'];
 
 
     readonly playValue$ = this.activatedRoute.queryParams.pipe(pluck('v'));
+
+    @Output() private readonly onEpisode = new EventEmitter<Episode>();
 
 
     constructor(private playerListService: PlayerListService,
@@ -33,9 +35,7 @@ export class PlayerListComponent implements OnInit {
 
 
 
-
     ngOnInit() {
-
 
         const queryParams$ = this.activatedRoute.queryParams;
 
@@ -43,6 +43,7 @@ export class PlayerListComponent implements OnInit {
         this.episodes$ = queryParams$
             .pipe(
                 distinctUntilKeyChanged('playList'),//只有当playList改变时才触发
+                filter(queryParams=>queryParams['playList']),
                 switchMap(queryParams => this.playerListService.findEpisodes(
                     queryParams['playList'],
                     PlayerListComponent.extractOtherProperties(queryParams),
@@ -50,11 +51,11 @@ export class PlayerListComponent implements OnInit {
                         page: queryParams['page'],
                         size: queryParams['size']
                     })
-                    .pipe(map(episodes => new Map<string, any>([['result', episodes], ['playValue', queryParams['playValue']]])))
+                    .pipe(map(episodes => new Map<string, any>([['result', episodes], ['rawValue', queryParams['rawValue']]])))
                 ),
                 tap(resultMap => {
-                    if (!resultMap.get('playValue')) {
-                        this.changeCurrentPlayValue(resultMap.get('result')[0]['playValue']);
+                    if (!resultMap.get('rawValue')) {
+                        this.playEpisode(resultMap.get('result')[0]);
                     }
                 }),
                 map(resultMap => resultMap.get('result'))
@@ -73,22 +74,18 @@ export class PlayerListComponent implements OnInit {
     }
 
 
-    private changeCurrentPlayValue(playValue: string) {
+    playEpisode(episode: Episode): void {
 
         this.router.navigate(['./'], {
             relativeTo: this.activatedRoute,
             queryParams: {
-                v: playValue
+                v: episode.rawValue
             },
             queryParamsHandling: 'merge'
-        })
+        });
+
+        this.onEpisode.emit(episode);
     }
-
-    playEpisode(episode: Episode): void {
-
-        this.changeCurrentPlayValue(episode.playValue);
-    }
-
 
 
 }

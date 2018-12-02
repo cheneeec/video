@@ -8,20 +8,20 @@
          </mat-slide-toggle>
      </div>
 
-    <ul role="list" id="play-list" class="play-list" #playList>
-        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode.playValue==(playValue$|async),' hover-active':episode.playValue!=(playValue$|async)}"><!---->
+    <ul role="list" id="play-list" class="play-list">
+        <li *ngFor="let episode of episodes;" role="listitem" class="item-content hover-cursor-pointer" [ngClass]="{'item-active':episode.rawValue==(playValue$|async),' hover-active':episode.rawValue!=(playValue$|async)}"><!---->
             <div fxLayout="row" (click)="playEpisode(episode);">
                 <div class="video-img">
                     <!--http://placehold.it/168x100-->
-                    <img  [src]="episode['image']" [alt]="episode['title']">
-                    <div class="play-time"><span class="play-info">{{(episode['timeLength']|playTime)}}</span> </div>
+                    <img  [src]="episode.image" [alt]="episode.title">
+                    <div class="play-time"><span class="play-info">{{(episode.duration|playTime)}}</span> </div>
                 </div>
 
                 <div class="info">
-                    <div class="title">{{episode['title']}}</div>
+                    <div class="title">{{episode.title}}</div>
                     <div class="video-belong light-font">
                         <small>
-                            {{episode['shortDescription']}}
+                            {{episode.shortDescription}}
                         </small>
                     </div>
                     <div class="views light-font">

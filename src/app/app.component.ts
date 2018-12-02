@@ -6,6 +6,7 @@ import {MatIconRegistry} from "@angular/material";
 import {ProgressBarValueService} from "./share/progress-bar-value.service";
 import {slideInAnimation} from "./animations";
 
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -19,18 +20,17 @@ export class AppComponent implements OnInit {
 
     constructor(private breakpointObserver: BreakpointObserver,
                 private matIconRegistry: MatIconRegistry,
-                private progressBarService: ProgressBarValueService
-    ) {
+                private progressBarService: ProgressBarValueService ) {
+
         this.matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
     }
 
 
     ngOnInit(): void {
-
     }
 
-
     getAnimationData(routerOutlet) {
+
         return true;
     }
 }

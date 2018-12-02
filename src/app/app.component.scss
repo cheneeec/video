@@ -1,21 +1,24 @@
 $sidebar-bg-color: #FAFAFA;
 $container-margin-top: 2px;
 
+
 mat-sidenav-container {
   min-height: calc(100vh - 67px);
   width: 100%;
   margin-top: $container-margin-top;
+ /* background-image: url('../assets/imgs/background.png');
+  background-repeat: no-repeat;
+  background-size: 100%;*/
+  background: rgba(255,255,255,0.2);
 
 }
 
 mat-sidenav {
-  background-color: $sidebar-bg-color;
   min-height: calc(100vh - 67px);
 }
 
 mat-sidenav-content {
   min-height: calc(100vh - 67px - 1vh);
-  background-color: white;
 }
 
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {PageRequestUtils, SimplePageRequest} from "../../domain/simple-page.request";
+import {PageRequestUtils, SimplePageRequest} from "../../model/simple-page.request";
 import {Observable} from "rxjs";
-import {ResponsePage} from "../../domain/response-page.model";
+import {ResponsePage} from "../../model/response-page.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({

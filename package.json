@@ -24,14 +24,11 @@
     "@angular/platform-browser-dynamic": "^7.0.2",
     "@angular/router": "^7.0.2",
     "@types/dplayer": "^1.24.0",
-    "@types/webtorrent": "^0.98.4",
     "core-js": "^2.5.4",
     "dplayer": "^1.25.0",
     "hls.js": "^0.11.0",
     "material-design-icons": "^3.0.1",
     "rxjs": "~6.3.3",
-    "videogular2": "^6.3.0",
-    "webtorrent": "^0.102.4",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

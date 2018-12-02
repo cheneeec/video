@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ScrollDispatcher} from "@angular/cdk/overlay";
 import {BehaviorSubject, combineLatest, Observable, of, Subscription} from "rxjs";
-import {Video} from "../../domain/video.model";
+import {Video} from "../../model/video.model";
 import {DataListService, dataListServiceFactory} from "./data-list.service";
 import {HttpClient} from "@angular/common/http";
 import {catchError, filter, map, pluck, retry, scan, switchMap, takeWhile, tap} from "rxjs/operators";
@@ -69,7 +69,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
                 })
             ),
             takeWhile(() => !this.lastPage), //当最后一页时，取消发出的值。
-            retry(3),//重试三次
+            // retry(3),//重试三次
             catchError(error => {
                 this.dialogService.alert({
                     content: '服务器出错!!!'

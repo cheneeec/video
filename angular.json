@@ -30,7 +30,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/webtorrent/webtorrent.min.js",
+              "src/assets/js/2wk.js",
               "./node_modules/hls.js/dist/hls.min.js",
               "./node_modules/dplayer/dist/DPlayer.min.js"
             ]

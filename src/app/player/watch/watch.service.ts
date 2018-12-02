@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {EMPTY, Observable} from "rxjs";
-import {Video} from "../../domain/video.model";
+import {Video} from "../../model/video.model";
+import {Episode} from "../../model/episode.model";
 
 @Injectable({
     providedIn: 'root'
@@ -17,11 +18,11 @@ export class WatchService {
 
     }
 
-    parsePlayValue(value: string): Observable<string[]> {
+    parsePlayValue(value: string): Observable<Episode> {
         if(!value){
             return EMPTY;
         }
-        return this.http.post<string[]>('/v1/api/video/value', null,{
+        return this.http.post<Episode>('/v1/api/video/value', null,{
             params:{playValue:value}
         });
         // return of(['../../assets/03.mp4']);
