@@ -6,7 +6,6 @@
     <div fxFlex="5 5 auto" [ngStyle.lt-md]="{minWidth:'100%'}" class="player">
         <div [ngClass]="{'content-container-padding':!(isHandset$|async)}" >
             <div id="dplayer"></div>
-
         </div>
 
         <div *ngIf="currentEpisode" class="content-container-padding video-description">

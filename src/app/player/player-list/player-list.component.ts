@@ -39,7 +39,6 @@ export class PlayerListComponent implements OnInit {
 
         const queryParams$ = this.activatedRoute.queryParams;
 
-
         this.episodes$ = queryParams$
             .pipe(
                 distinctUntilKeyChanged('playList'),//只有当playList改变时才触发
@@ -60,6 +59,7 @@ export class PlayerListComponent implements OnInit {
                 }),
                 map(resultMap => resultMap.get('result'))
             );
+
 
     }
 

@@ -4,9 +4,8 @@ import {ActivatedRoute} from "@angular/router";
 import {filter, map, pluck, switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import DPlayer from "dplayer";
+import DPlayer, {DPlayerEvents} from "dplayer";
 import {Episode} from "../../model/episode.model";
-
 @Component({
     selector: 'app-watch',
     templateUrl: './watch.component.html',
@@ -17,6 +16,7 @@ export class WatchComponent implements OnInit, OnDestroy {
 
     //当前需要播放的剧集（真实播放），传给app-player
     currentEpisode: Episode;
+
 
     readonly isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(map(result => result.matches));
 
@@ -37,7 +37,8 @@ export class WatchComponent implements OnInit, OnDestroy {
                 pluck('v'),
                 filter(v => !!v),
                 switchMap((v: string) => this.watchService.parsePlayValue(v))
-            ).subscribe(episode => this.play(episode))
+            ).subscribe(episode => this.play(episode));
+
 
     }
 
@@ -48,6 +49,7 @@ export class WatchComponent implements OnInit, OnDestroy {
 
 
     private static createDPlayer(url: string, image: string) {
+
         return new DPlayer({
             container: document.getElementById('dplayer'),
             screenshot: true,
@@ -61,21 +63,28 @@ export class WatchComponent implements OnInit, OnDestroy {
 
 
     private play(episode: Episode) {
+        if (episode) {
+            const playAddress = episode.parseValue[0];
+            const url = playAddress.url || eval(playAddress.script); //如果没有现成的url就执行脚本
+            const image = episode.image;
 
-        const playAddress = episode.parseValue[0];
-        const url = playAddress.url || eval(playAddress.script); //如果没有现成的url就执行脚本
-        const image = episode.image;
+            console.log(url);
+            if (this.dplayer) {
 
-        if (this.dplayer) {
+                this.dplayer.switchVideo({
+                    url: playAddress.url,
+                    thumbnails: image
+                }, null);
 
-            this.dplayer.switchVideo({
-                url: playAddress.url,
-                thumbnails: image
-            }, null);
+            } else {
+                this.dplayer = WatchComponent.createDPlayer(url, image);
+                console.log(DPlayerEvents);
+                // this.dplayer.on(DPlayerEvents['error'], () => alert('error'));
+                // this.dplayer.on('canplay', () => this.dplayer.play());
 
-            this.dplayer.play()
+            }
 
-        } else
-            this.dplayer = WatchComponent.createDPlayer(url, image);
+        }
+
     }
 }

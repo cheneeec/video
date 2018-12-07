@@ -33,19 +33,14 @@ export class ProgressVisibleInterceptor implements HttpInterceptor {
                 this.progressBarValueService.loading();
             }
 
-           /* if (showProgressSpinner) {
-                this.progressSpinnerStatusService.loading();
-            }
-*/
+
             return next.handle(request).pipe(
                 tap(event => {
                     if (event instanceof HttpResponse) {
                         if (showProgressBar) {
                             this.progressBarValueService.loadCompleted();
                         }
-                      /*  if (showProgressSpinner) {
-                            this.progressSpinnerStatusService.loadCompleted();
-                        }*/
+
                     }
                 })
             );
